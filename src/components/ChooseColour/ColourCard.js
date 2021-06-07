@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-const ColourCard = ({ option, setTabIndex }) => {
+const ColourCard = ({ option, setTabIndex, setColour }) => {
   return (
     <Box
       maxW="sm"
@@ -11,7 +11,10 @@ const ColourCard = ({ option, setTabIndex }) => {
       textAlign="center"
       m="2"
       style={{ cursor: "pointer" }}
-      onClick={() => setTabIndex(1)}
+      onClick={() => {
+        setTabIndex(1);
+        setColour(option.name);
+      }}
     >
       <Box
         style={{
@@ -27,7 +30,7 @@ const ColourCard = ({ option, setTabIndex }) => {
         {option.name}
       </Box>
       <Box bg="white" p="4">
-        <img src={option.src} alt={option.alt} />
+        <img src={option.src} alt={option.name} />
       </Box>
     </Box>
   );

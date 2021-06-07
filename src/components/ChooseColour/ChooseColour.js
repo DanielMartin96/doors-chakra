@@ -3,7 +3,7 @@ import React from "react";
 import ColourCard from "./ColourCard";
 import options from "./options";
 
-export const ChooseColour = ({ setTabIndex }) => {
+export const ChooseColour = ({ setTabIndex, setColour }) => {
   return (
     <div
       style={{
@@ -17,6 +17,7 @@ export const ChooseColour = ({ setTabIndex }) => {
           key={option.name}
           option={option}
           setTabIndex={setTabIndex}
+          setColour={setColour}
         />
       ))}
     </div>
