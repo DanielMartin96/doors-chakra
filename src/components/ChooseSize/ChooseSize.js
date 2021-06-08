@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading, Text, FormControl } from "@chakra-ui/react";
 
 import "./ChooseSize.css";
@@ -13,21 +13,33 @@ const ChooseSize = ({ colour, style }) => {
   // Holds all the info for the order
   const [order, setOrder] = useState({
     height: null,
+    standardHeight: null,
     width: null,
+    standardWidth: null,
     sideHingeHoles: "Left Hand Door",
     topHingeHole: null,
     bottomHingeHole: null,
     extraHingeHoleSide: "",
     extraHingeHoleDistance: null,
     quantity: null,
-    price: null,
+    price: 0.0,
   });
+
+  useEffect(() => {
+    if (order.standardHeight && order.standardWidth !== null) {
+      setOrder({
+        ...order,
+        price:
+          findPrice(order.standardHeight, order.standardWidth, prices).price *
+          order.quantity,
+      });
+    }
+  }, [order.quantity]);
 
   // Takes a value and finds the next size up in the array. Will need this information to find the relevant price
   const findNextSizeUp = (value, array) => {
     for (let i = 0; i < array.length; i++) {
       if (value <= array[i]) {
-        console.log(array[i]);
         return array[i];
       }
     }
@@ -68,12 +80,16 @@ const ChooseSize = ({ colour, style }) => {
               borderRadius: "5px",
               width: "100%",
             }}
+            onChange={(e) => setOrder({ ...order, height: e.target.value })}
+            disabled={needsCustomSize}
           >
             <option value="" disabled selected>
               Height
             </option>
             {heights.map((height) => (
-              <option key={height}>{height}</option>
+              <option value={height} key={height}>
+                {height}
+              </option>
             ))}
           </select>
         </FormControl>
@@ -91,12 +107,16 @@ const ChooseSize = ({ colour, style }) => {
               borderRadius: "5px",
               width: "100%",
             }}
+            onChange={(e) => setOrder({ ...order, width: e.target.value })}
+            disabled={needsCustomSize}
           >
             <option value="" disabled selected>
               Width
             </option>
             {widths.map((width) => (
-              <option key={width}>{width}</option>
+              <option value={width} key={width}>
+                {width}
+              </option>
             ))}
           </select>
         </FormControl>
@@ -129,6 +149,13 @@ const ChooseSize = ({ colour, style }) => {
                 borderBottomLeftRadius: "5px",
                 width: "85%",
               }}
+              onChange={(e) =>
+                setOrder({
+                  ...order,
+                  height: e.target.value,
+                  standardHeight: findNextSizeUp(e.target.value, heights),
+                })
+              }
             />
             <div
               style={{
@@ -153,7 +180,6 @@ const ChooseSize = ({ colour, style }) => {
             <input
               type="number"
               placeholder="Width"
-              value=""
               style={{
                 height: "50px",
                 fontSize: "30px",
@@ -162,6 +188,13 @@ const ChooseSize = ({ colour, style }) => {
                 borderTopLeftRadius: "5px",
                 borderBottomLeftRadius: "5px",
                 width: "85%",
+              }}
+              onChange={(e) => {
+                setOrder({
+                  ...order,
+                  width: e.target.value,
+                  standardWidth: findNextSizeUp(e.target.value, widths),
+                });
               }}
             />
             <div
@@ -212,6 +245,9 @@ const ChooseSize = ({ colour, style }) => {
                 borderRadius: "5px",
                 width: "49%",
               }}
+              onChange={(e) =>
+                setOrder({ ...order, sideHingeHoles: e.target.value })
+              }
             >
               <option value="" disabled selected>
                 Orientation
@@ -222,12 +258,10 @@ const ChooseSize = ({ colour, style }) => {
             </select>
           </FormControl>
           <div style={{ display: "flex" }}>
-            {/* Extra Hole From Measurement */}
-            <FormControl m="2" d="flex" width="100%">
+            <FormControl m="2" d="flex">
               <input
                 type="number"
-                placeholder="Width"
-                value=""
+                placeholder="Top Hole"
                 style={{
                   height: "50px",
                   fontSize: "30px",
@@ -237,6 +271,9 @@ const ChooseSize = ({ colour, style }) => {
                   borderBottomLeftRadius: "5px",
                   width: "85%",
                 }}
+                onChange={(e) =>
+                  setOrder({ ...order, topHingeHole: e.target.value })
+                }
               />
               <div
                 style={{
@@ -256,28 +293,121 @@ const ChooseSize = ({ colour, style }) => {
                 <span style={{ color: "white" }}>MM</span>
               </div>
             </FormControl>
-            {/* Measurement from Top or Bottom */}
-            <div style={{ margin: "8px" }}>
-              <select
-                type="select"
+            <FormControl m="2" d="flex">
+              <input
+                type="number"
+                placeholder="Bottom Hole"
                 style={{
-                  backgroundColor: "#C2B59C",
                   height: "50px",
-                  padding: "0 30px",
                   fontSize: "30px",
-                  fontWeight: "semibold",
-                  color: "white",
-                  borderRadius: "5px",
+                  textColor: "white",
+                  padding: "20px",
+                  borderTopLeftRadius: "5px",
+                  borderBottomLeftRadius: "5px",
+                  width: "85%",
+                }}
+                onChange={(e) =>
+                  setOrder({ ...order, bottomHingeHole: e.target.value })
+                }
+              />
+              <div
+                style={{
+                  backgroundColor: "#58595B",
+                  height: "50px",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  textColor: "white",
+                  borderTopRightRadius: "5px",
+                  borderBottomRightRadius: "5px",
+                  width: "15%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <option value="" disabled selected>
-                  From
-                </option>
-                <option>Top</option>
-                <option>Bottom</option>
-              </select>
-            </div>
+                <span style={{ color: "white" }}>MM</span>
+              </div>
+            </FormControl>
           </div>
+          {/* Extra Hinge Hole Checkbox */}
+          <FormControl m="2">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Text fontSize="xl" mr="2">
+                Do you need an extra hinge hole?
+              </Text>
+              <input
+                type="checkbox"
+                onChange={() => setNeedsExtraHingeHoles(!needsExtraHingeHoles)}
+              />
+            </div>
+          </FormControl>
+          {needsExtraHingeHoles ? (
+            <div style={{ display: "flex" }}>
+              {/* Extra Hole From Measurement */}
+              <FormControl m="2" d="flex" width="100%">
+                <input
+                  type="number"
+                  placeholder="Extra Hole"
+                  style={{
+                    height: "50px",
+                    fontSize: "30px",
+                    textColor: "white",
+                    padding: "20px",
+                    borderTopLeftRadius: "5px",
+                    borderBottomLeftRadius: "5px",
+                    width: "85%",
+                  }}
+                  onChange={(e) =>
+                    setOrder({
+                      ...order,
+                      extraHingeHoleDistance: e.target.value,
+                    })
+                  }
+                />
+                <div
+                  style={{
+                    backgroundColor: "#58595B",
+                    height: "50px",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    textColor: "white",
+                    borderTopRightRadius: "5px",
+                    borderBottomRightRadius: "5px",
+                    width: "15%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span style={{ color: "white" }}>MM</span>
+                </div>
+              </FormControl>
+              {/* Measurement from Top or Bottom */}
+              <div style={{ margin: "8px" }}>
+                <select
+                  type="select"
+                  style={{
+                    backgroundColor: "#C2B59C",
+                    height: "50px",
+                    padding: "0 30px",
+                    fontSize: "30px",
+                    fontWeight: "semibold",
+                    color: "white",
+                    borderRadius: "5px",
+                  }}
+                  onChange={(e) =>
+                    setOrder({ ...order, extraHingeHoleSide: e.target.value })
+                  }
+                >
+                  <option value="" disabled selected>
+                    From
+                  </option>
+                  <option>Top</option>
+                  <option>Bottom</option>
+                </select>
+              </div>
+            </div>
+          ) : null}
         </>
       ) : null}
       {/* Quantity Input */}
@@ -285,7 +415,6 @@ const ChooseSize = ({ colour, style }) => {
         <input
           type="number"
           placeholder="Quantity"
-          value=""
           style={{
             height: "50px",
             fontSize: "30px",
@@ -294,10 +423,11 @@ const ChooseSize = ({ colour, style }) => {
             borderRadius: "5px",
             width: "98.5%",
           }}
+          onChange={(e) => setOrder({ ...order, quantity: e.target.value })}
         />
       </FormControl>
       <Text fontSize="3xl" m="2">
-        Price: <b>£300.40</b>
+        Price: <b>£{order.price}</b>
       </Text>
       <button
         style={{
