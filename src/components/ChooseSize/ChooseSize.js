@@ -6,7 +6,7 @@ import heights from "./heights";
 import widths from "./widths";
 import prices from "./prices";
 
-const ChooseSize = ({ colour, style }) => {
+const ChooseSize = ({ colour, style, addToCart }) => {
   const [needsCustomSize, setNeedsCustomSize] = useState(false);
   const [needsHingeDrilling, setNeedsHingeDrilling] = useState(false);
   const [needsExtraHingeHoles, setNeedsExtraHingeHoles] = useState(false);
@@ -427,7 +427,7 @@ const ChooseSize = ({ colour, style }) => {
         />
       </FormControl>
       <Text fontSize="3xl" m="2">
-        Price: <b>£{order.price}</b>
+        Price: <b>£{order.price.toFixed(2)}</b>
       </Text>
       <button
         style={{
@@ -439,6 +439,7 @@ const ChooseSize = ({ colour, style }) => {
           borderRadius: "5px",
           padding: "0px 40px",
         }}
+        onClick={() => addToCart({ ...order, colour, style })}
       >
         Add to Basket
       </button>

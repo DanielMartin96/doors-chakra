@@ -10,7 +10,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const Basket = ({ basketOpen, setBasketOpen }) => {
+import Item from "./Item";
+
+const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
+  console.log(cart);
+
   return (
     <>
       <Drawer
@@ -23,7 +27,11 @@ const Basket = ({ basketOpen, setBasketOpen }) => {
           <DrawerCloseButton />
           <DrawerHeader>Your Basket</DrawerHeader>
 
-          <DrawerBody></DrawerBody>
+          <DrawerBody>
+            {cart.map((item, idx) => (
+              <Item item={item} removeFromCart={removeFromCart} idx={idx} />
+            ))}
+          </DrawerBody>
 
           <DrawerFooter>
             <Button

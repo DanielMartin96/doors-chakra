@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "@chakra-ui/react";
 import { BiBasket } from "react-icons/bi";
 
@@ -13,6 +13,70 @@ function App() {
   const [colour, setColour] = useState("");
   const [style, setStyle] = useState("");
   const [basketOpen, setBasketOpen] = useState(false);
+  // Cart
+  const [cart, setCart] = useState([]);
+  // Total
+  const [total, setTotal] = useState(0.0);
+
+  useEffect(() => {
+    getCart();
+    getTotal();
+  }, []);
+
+  console.log(cart);
+
+  const addToCart = (item) => {
+    window.localStorage.setItem(item.product, JSON.stringify(item));
+    setCart((currentCart) => [...currentCart, item]);
+    setTotal(total + +item.total);
+    setBasketOpen(!basketOpen);
+  };
+
+  const removeFromCart = (id, item) => {
+    window.localStorage.removeItem(item);
+    setTotal(total - +cart[id].total);
+    setCart((currentCart) => {
+      return [...currentCart.slice(0, id), ...currentCart.slice(id + 1)];
+    });
+  };
+
+  const getCart = () => {
+    var values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+    while (i--) {
+      values.push(localStorage.getItem(keys[i]));
+    }
+    let array = [];
+
+    for (let i = 0; i < values.length; i++) {
+      array.push(JSON.parse(values[i]));
+    }
+    return setCart(array);
+  };
+
+  const getTotal = () => {
+    var values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+    while (i--) {
+      values.push(localStorage.getItem(keys[i]));
+    }
+
+    let totals = [];
+    for (let i = 0; i < values.length; i++) {
+      totals.push(JSON.parse(values[i]).total);
+    }
+
+    if (values.length > 0) {
+      let totalBasket = totals.reduce((acc, curr) => +acc + +curr);
+      setTotal(+totalBasket);
+    }
+
+    return;
+  };
 
   const tabItems = [
     {
@@ -31,7 +95,9 @@ function App() {
     },
     {
       title: "Size",
-      content: <ChooseSize colour={colour} style={style} />,
+      content: (
+        <ChooseSize colour={colour} style={style} addToCart={addToCart} />
+      ),
     },
     {
       title: "Frames and Features",
@@ -67,7 +133,12 @@ function App() {
         colour={colour}
         style={style}
       />
-      <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+      <Basket
+        basketOpen={basketOpen}
+        setBasketOpen={setBasketOpen}
+        cart={cart}
+        removeFromCart={removeFromCart}
+      />
     </Container>
   );
 }
