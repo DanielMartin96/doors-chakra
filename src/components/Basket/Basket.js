@@ -34,7 +34,7 @@ const Basket = ({ basketOpen, setBasketOpen }) => {
               Cancel
             </Button>
             <Button colorScheme="dark" variant="outline">
-              Save
+              Checkout
             </Button>
           </DrawerFooter>
         </DrawerContent>

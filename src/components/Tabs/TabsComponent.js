@@ -42,10 +42,11 @@ const TabsComponent = ({
               padding: "2px 35.56px",
             }}
             onClick={() => {
-              setTabIndex(idx);
               if (item.title.length === 0) {
                 setBasketOpen(!basketOpen);
+                return;
               }
+              setTabIndex(idx);
             }}
             isDisabled={tabValidation(item)}
           >
