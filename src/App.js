@@ -6,6 +6,7 @@ import TabsComponent from "./components/Tabs/TabsComponent";
 import ChooseColour from "./components/ChooseColour/ChooseColour";
 import ChooseStyle from "./components/ChooseStyle/ChooseStyle";
 import ChooseSize from "./components/ChooseSize/ChooseSize";
+import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
 import Basket from "./components/Basket/Basket";
 
 function App() {
@@ -109,7 +110,7 @@ function App() {
     },
     {
       title: "Hinges, Drawers and Internals",
-      content: "Hinges, Drawers and Internals content",
+      content: <HingesDrawersAndInternals />,
     },
     {
       title: "Checkout",

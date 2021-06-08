@@ -27,7 +27,13 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
           <DrawerCloseButton />
           <DrawerHeader>Your Basket</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
             {cart.map((item, idx) => (
               <Item item={item} removeFromCart={removeFromCart} idx={idx} />
             ))}
