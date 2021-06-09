@@ -11,9 +11,8 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-const HingeComponent = ({ hinge, addToCart }) => {
+const DrawerComponent = ({ drawer, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [colour, setColour] = useState("");
   const [errors, setErrors] = useState([]);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -30,24 +29,19 @@ const HingeComponent = ({ hinge, addToCart }) => {
     return true;
   };
 
-  const onSubmit = (e, hinge) => {
+  const onSubmit = (e, drawer) => {
     e.preventDefault();
     errors.length = 0;
-
-    if (colour.length === 0) {
-      return setErrors([...errors, "Please pick a colour"]);
-    }
 
     if (!ValidateQuantity(quantity)) {
       return;
     }
 
     addToCart({
-      product: hinge.name,
-      colour,
+      product: drawer.name,
       quantity,
-      src: hinge.src,
-      total: hinge.price * quantity,
+      src: drawer.src,
+      total: drawer.price * quantity,
     });
 
     setAddedToCart(true);
@@ -77,33 +71,13 @@ const HingeComponent = ({ hinge, addToCart }) => {
           padding: "5px 0",
         }}
       >
-        {hinge.name}
+        {drawer.name}
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <img src={hinge.src} alt={hinge.name} />
+        <img src={drawer.src} alt={drawer.name} />
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        {hinge.description}
-      </Box>
-      <Box
-        bg="white"
-        style={{ padding: "0px 10px 10px 10px" }}
-        d="flex"
-        justifyContent="center"
-      >
-        {["Silver", "Black"].map((colour) => {
-          return (
-            <div style={{ margin: " 0 10px" }}>
-              <input
-                type="radio"
-                name="colour"
-                id={colour}
-                onChange={() => setColour(colour)}
-              />{" "}
-              <label for={colour}>{colour}</label>
-            </div>
-          );
-        })}
+        {drawer.description}
       </Box>
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
@@ -117,13 +91,13 @@ const HingeComponent = ({ hinge, addToCart }) => {
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <p>
-          <b>£{(hinge.price * quantity).toFixed(2)}</b>
+          <b>£{(drawer.price * quantity).toFixed(2)}</b>
         </p>
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <Button
           style={{ backgroundColor: "#C2B59C", width: "100%", color: "white" }}
-          onClick={(e) => onSubmit(e, hinge)}
+          onClick={(e) => onSubmit(e, drawer)}
         >
           Add To Cart
         </Button>
@@ -151,4 +125,4 @@ const HingeComponent = ({ hinge, addToCart }) => {
   );
 };
 
-export default HingeComponent;
+export default DrawerComponent;

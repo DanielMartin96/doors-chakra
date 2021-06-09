@@ -90,7 +90,7 @@ const options = [
   },
   {
     name: "Hettich 110° Non Soft Close Hinge",
-    description: "",
+    description: "110° opening angle",
     src: hingesPhotos["hettich-110.jpg"].default,
     colourChoice: true,
     price: 1.58,
