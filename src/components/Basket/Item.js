@@ -1,9 +1,13 @@
-import React from "react";
-import { Box } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Text, CloseButton } from "@chakra-ui/react";
 
 import options from "../ChooseColour/options";
 
 const Item = ({ item, removeFromCart, idx }) => {
+  const [price, setPrice] = useState(item.price / item.quantity);
+
+  console.log(price);
+
   const findColour = (colour, options) => {
     for (let i = 0; i < options.length; i++) {
       if (colour === options[i].name) {
@@ -12,6 +16,8 @@ const Item = ({ item, removeFromCart, idx }) => {
     }
   };
 
+  console.log(item);
+
   return (
     <Box
       d="flex"
@@ -19,6 +25,7 @@ const Item = ({ item, removeFromCart, idx }) => {
       flexDirection="column"
       textAlign="center"
       m="2"
+      w="200px"
     >
       <Box
         style={{
@@ -26,19 +33,52 @@ const Item = ({ item, removeFromCart, idx }) => {
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
           color: "white",
-          fontSize: "16px",
           fontWeight: "bold",
           padding: "5px 0",
         }}
+        d="flex"
+        justifyContent="space-between"
+        alignItems="center"
       >
-        {item.colour}
-        <br />
-        {item.style}
+        <div>
+          <CloseButton style={{ color: "#808080" }} isDisabled />
+        </div>
+        <div>
+          {item.colour} {item.style} {item.product}
+        </div>
+        <div>
+          <CloseButton onClick={() => removeFromCart(idx)} />
+        </div>
       </Box>
-      <Box bg="white" p="4">
-        <img src={findColour(item.colour, options)} alt={item.colour} />
+      <Box
+        style={{ backgroundColor: "#E7E7E7" }}
+        p="4"
+        d="flex"
+        justifyContent="center"
+      >
+        <img
+          src={
+            item.src !== undefined ? item.src : findColour(item.colour, options)
+          }
+          alt={item.colour}
+          style={{ width: "100px" }}
+        />
       </Box>
-      <button onClick={() => removeFromCart(idx)}>Remove from Cart</button>
+
+      <Box style={{ backgroundColor: "#E7E7E7" }} pl="4" pr="4" pb="4">
+        <Text color="gray">
+          {item.colour} {item.style} {item.product}
+        </Text>
+        <Text color="gray">
+          {item.height === null && item.width === null
+            ? item.height + "x" + item.width + "mm"
+            : null}
+        </Text>
+        <Text fontWeight="bold" color="gray">
+          £{item.price}
+          {item.total}
+        </Text>
+      </Box>
     </Box>
   );
 };

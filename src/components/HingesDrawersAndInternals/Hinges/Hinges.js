@@ -2,10 +2,8 @@ import React from "react";
 
 import options from "./options";
 import HingeComponent from "./HingeComponent";
-import HingesDrawersAndInternals from "../HingesDrawersAndInternals";
 
-const Hinges = () => {
-  console.log(options);
+const Hinges = ({ addToCart }) => {
   return (
     <div
       style={{
@@ -15,7 +13,7 @@ const Hinges = () => {
       }}
     >
       {options.map((hinge) => (
-        <HingeComponent hinge={hinge} />
+        <HingeComponent hinge={hinge} addToCart={addToCart} />
       ))}
     </div>
   );

@@ -26,14 +26,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
   });
 
   useEffect(() => {
-    if (order.standardHeight && order.standardWidth !== null) {
-      setOrder({
-        ...order,
-        price:
-          findPrice(order.standardHeight, order.standardWidth, prices).price *
-          order.quantity,
-      });
-    }
+    onChange();
   }, [order.quantity]);
 
   // Takes a value and finds the next size up in the array. Will need this information to find the relevant price
@@ -51,6 +44,18 @@ const ChooseSize = ({ colour, style, addToCart }) => {
       if (height === array[i].height && width === array[i].width) {
         return array[i];
       }
+    }
+  };
+
+  // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
+  const onChange = () => {
+    if (order.standardHeight && order.standardWidth !== null) {
+      setOrder({
+        ...order,
+        price:
+          findPrice(order.standardHeight, order.standardWidth, prices).price *
+          order.quantity,
+      });
     }
   };
 
@@ -424,6 +429,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             width: "98.5%",
           }}
           onChange={(e) => setOrder({ ...order, quantity: e.target.value })}
+          onClick={(e) => onChange()}
         />
       </FormControl>
       <Text fontSize="3xl" m="2">

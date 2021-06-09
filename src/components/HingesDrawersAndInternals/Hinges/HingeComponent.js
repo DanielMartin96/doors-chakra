@@ -9,12 +9,10 @@ import {
   Button,
   Alert,
   AlertIcon,
-  Radio,
-  RadioGroup,
 } from "@chakra-ui/react";
 
-const HingeComponent = ({ hinge }) => {
-  const [quantity, setQuantity] = useState(0);
+const HingeComponent = ({ hinge, addToCart }) => {
+  const [quantity, setQuantity] = useState(1);
   const [colour, setColour] = useState("");
   const [errors, setErrors] = useState([]);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -24,6 +22,7 @@ const HingeComponent = ({ hinge }) => {
       setErrors([...errors, "Quantity is not a number"]);
       return false;
     }
+
     if (parseInt(value) < 1) {
       setErrors([...errors, "Quantity must be greater than 0"]);
       return false;
@@ -31,7 +30,32 @@ const HingeComponent = ({ hinge }) => {
     return true;
   };
 
-  const onSubmit = (e, product, price, quantity) => {};
+  const onSubmit = (e, hinge, price) => {
+    e.preventDefault();
+    errors.length = 0;
+
+    if (colour.length === 0) {
+      return setErrors([...errors, "Please pick a colour"]);
+    }
+
+    if (!ValidateQuantity(quantity)) {
+      return;
+    }
+
+    addToCart({
+      product: hinge.name,
+      colour,
+      quantity,
+      src: hinge.src,
+      total: hinge.price * quantity,
+    });
+
+    setAddedToCart(true);
+
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 3000);
+  };
 
   return (
     <Box
@@ -61,9 +85,29 @@ const HingeComponent = ({ hinge }) => {
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         {hinge.description}
       </Box>
+      <Box
+        bg="white"
+        style={{ padding: "0px 10px 10px 10px" }}
+        d="flex"
+        justifyContent="center"
+      >
+        {["Silver", "Black"].map((colour) => {
+          return (
+            <div style={{ margin: " 0 10px" }}>
+              <input
+                type="radio"
+                name="colour"
+                id={colour}
+                onChange={() => setColour(colour)}
+              />{" "}
+              <label for={colour}>{colour}</label>
+            </div>
+          );
+        })}
+      </Box>
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <NumberInput>
+        <NumberInput onChange={(e) => setQuantity(e)}>
           <NumberInputField placeholder="Quantity" />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -72,21 +116,36 @@ const HingeComponent = ({ hinge }) => {
         </NumberInput>
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+        <p>
+          <b>£{(hinge.price * quantity).toFixed(2)}</b>
+        </p>
+      </Box>
+      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <Button
           style={{ backgroundColor: "#C2B59C", width: "100%", color: "white" }}
+          onClick={(e) => onSubmit(e, hinge)}
         >
           Add To Cart
         </Button>
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <Alert status="error">
-          <AlertIcon />
-          Quantity has to be more than 0
-        </Alert>
-        <Alert status="success">
-          <AlertIcon />
-          Added to Basket
-        </Alert>
+        {errors.length > 0
+          ? errors.map((error) => {
+              return (
+                <Alert status="error">
+                  <AlertIcon />
+                  {error}
+                </Alert>
+              );
+            })
+          : null}
+
+        {addedToCart ? (
+          <Alert status="success">
+            <AlertIcon />
+            Added to Basket
+          </Alert>
+        ) : null}
       </Box>
     </Box>
   );

@@ -24,8 +24,6 @@ function App() {
     getTotal();
   }, []);
 
-  console.log(cart);
-
   const addToCart = (item) => {
     window.localStorage.setItem(item.product, JSON.stringify(item));
     setCart((currentCart) => [...currentCart, item]);
@@ -110,7 +108,7 @@ function App() {
     },
     {
       title: "Hinges, Drawers and Internals",
-      content: <HingesDrawersAndInternals />,
+      content: <HingesDrawersAndInternals addToCart={addToCart} />,
     },
     {
       title: "Checkout",

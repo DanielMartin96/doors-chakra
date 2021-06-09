@@ -13,8 +13,6 @@ import {
 import Item from "./Item";
 
 const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
-  console.log(cart);
-
   return (
     <>
       <Drawer
@@ -32,6 +30,7 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
               display: "flex",
               justifyContent: "center",
               flexWrap: "wrap",
+              overflowY: "scroll",
             }}
           >
             {cart.map((item, idx) => (
@@ -40,16 +39,10 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button
-              variant="outline"
-              mr={3}
-              onClick={() => setBasketOpen(!basketOpen)}
-            >
+            <Button mr={3} onClick={() => setBasketOpen(!basketOpen)}>
               Cancel
             </Button>
-            <Button colorScheme="dark" variant="outline">
-              Checkout
-            </Button>
+            <Button colorScheme="blackAlpha">Checkout</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
