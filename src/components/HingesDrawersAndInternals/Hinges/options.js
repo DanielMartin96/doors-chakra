@@ -105,7 +105,8 @@ const options = [
   },
   {
     name: "Hettich Push To Open Pin",
-    description: "",
+    description:
+      "A gentle press on the door is all it takes for the Push to open piston to move the door into a position that easily lets you get your fingers behind to open it.",
     src: hingesPhotos["hettich-push.jpg"].default,
     colourChoice: true,
     price: 5.02,

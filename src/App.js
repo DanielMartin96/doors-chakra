@@ -6,10 +6,11 @@ import TabsComponent from "./components/Tabs/TabsComponent";
 import ChooseColour from "./components/ChooseColour/ChooseColour";
 import ChooseStyle from "./components/ChooseStyle/ChooseStyle";
 import ChooseSize from "./components/ChooseSize/ChooseSize";
+import Accessories from "./components/Accessories/Accessories";
 import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
 import Basket from "./components/Basket/Basket";
 
-function App() {
+const App = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [colour, setColour] = useState("");
   const [style, setStyle] = useState("");
@@ -104,7 +105,9 @@ function App() {
     },
     {
       title: "Accessories",
-      content: "Accessories content",
+      content: (
+        <Accessories colour={colour} style={style} addToCart={addToCart} />
+      ),
     },
     {
       title: "Hinges, Drawers and Internals",
@@ -140,6 +143,6 @@ function App() {
       />
     </Container>
   );
-}
+};
 
 export default App;

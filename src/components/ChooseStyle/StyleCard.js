@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import React from "react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 
 const StyleCard = ({ option, setTabIndex, setStyle }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Box
@@ -13,8 +15,8 @@ const StyleCard = ({ option, setTabIndex, setStyle }) => {
         m="2"
         style={{ cursor: "pointer" }}
         onClick={() => {
-          setStyle(option.name);
           setTabIndex(2);
+          setStyle(option.name);
         }}
       >
         <Box

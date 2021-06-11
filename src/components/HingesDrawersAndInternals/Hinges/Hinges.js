@@ -12,8 +12,8 @@ const Hinges = ({ addToCart }) => {
         justifyContent: "space-evenly",
       }}
     >
-      {options.map((hinge) => (
-        <HingeComponent hinge={hinge} addToCart={addToCart} />
+      {options.map((hinge, idx) => (
+        <HingeComponent hinge={hinge} addToCart={addToCart} key={idx} />
       ))}
     </div>
   );

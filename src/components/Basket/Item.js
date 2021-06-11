@@ -23,7 +23,6 @@ const Item = ({ item, removeFromCart, idx }) => {
       flexDirection="column"
       textAlign="center"
       m="2"
-      w="200px"
     >
       <Box
         style={{
@@ -59,7 +58,7 @@ const Item = ({ item, removeFromCart, idx }) => {
             item.src !== undefined ? item.src : findColour(item.colour, options)
           }
           alt={item.colour}
-          style={{ width: "100px" }}
+          style={{ width: "200px" }}
         />
       </Box>
 

@@ -12,8 +12,8 @@ const Drawers = ({ addToCart }) => {
         justifyContent: "space-evenly",
       }}
     >
-      {options.map((drawer) => (
-        <DrawerComponent drawer={drawer} addToCart={addToCart} />
+      {options.map((drawer, idx) => (
+        <DrawerComponent drawer={drawer} addToCart={addToCart} key={idx} />
       ))}
     </div>
   );

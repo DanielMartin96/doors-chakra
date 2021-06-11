@@ -45,16 +45,31 @@ const ChooseSize = ({ colour, style, addToCart }) => {
         return array[i];
       }
     }
+
+    return;
   };
 
   // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
   const onChange = () => {
-    if (order.standardHeight && order.standardWidth !== null) {
+    if (
+      needsCustomSize &&
+      order.standardHeight !== null &&
+      order.standardWidth !== null
+    ) {
       setOrder({
         ...order,
         price:
           findPrice(order.standardHeight, order.standardWidth, prices).price *
           order.quantity,
+      });
+
+      return;
+    }
+    if (order.height && order.width !== null) {
+      setOrder({
+        ...order,
+        price:
+          findPrice(+order.height, +order.width, prices).price * order.quantity,
       });
     }
   };
@@ -85,7 +100,10 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               borderRadius: "5px",
               width: "100%",
             }}
-            onChange={(e) => setOrder({ ...order, height: e.target.value })}
+            onChange={(e) => {
+              setOrder({ ...order, height: e.target.value });
+              onChange();
+            }}
             disabled={needsCustomSize}
           >
             <option value="" disabled selected>
@@ -112,7 +130,10 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               borderRadius: "5px",
               width: "100%",
             }}
-            onChange={(e) => setOrder({ ...order, width: e.target.value })}
+            onChange={(e) => {
+              setOrder({ ...order, width: e.target.value });
+              onChange();
+            }}
             disabled={needsCustomSize}
           >
             <option value="" disabled selected>
@@ -429,7 +450,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             width: "98.5%",
           }}
           onChange={(e) => setOrder({ ...order, quantity: e.target.value })}
-          onClick={(e) => onChange()}
+          onClick={() => onChange()}
         />
       </FormControl>
       <Text fontSize="3xl" m="2">

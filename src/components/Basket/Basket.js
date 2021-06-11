@@ -34,7 +34,7 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
             }}
           >
             {cart.map((item, idx) => (
-              <Item item={item} removeFromCart={removeFromCart} idx={idx} />
+              <Item item={item} removeFromCart={removeFromCart} key={idx} />
             ))}
           </DrawerBody>
 
