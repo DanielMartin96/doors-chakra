@@ -26,11 +26,7 @@ const TabsComponent = ({
 
   return (
     <Tabs index={tabIndex}>
-      <TabList
-        style={{
-          borderBottom: "10px solid #C2B59C",
-        }}
-      >
+      <TabList className="tabs">
         {tabItems.map((item, idx) => (
           <Tab
             key={idx}
@@ -39,7 +35,8 @@ const TabsComponent = ({
               backgroundColor: "#C2B59C",
             }}
             style={{
-              padding: "2px 35.56px",
+              padding: "5px 35.56px",
+              borderBottom: "5px solid #C2B59C",
             }}
             onClick={() => {
               if (item.title.length === 0) {

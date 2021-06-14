@@ -18,7 +18,7 @@ const App = () => {
   // Cart
   const [cart, setCart] = useState([]);
   // Total
-  const [total, setTotal] = useState(0.0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     getCart();
@@ -34,7 +34,8 @@ const App = () => {
 
   const removeFromCart = (id, item) => {
     window.localStorage.removeItem(item);
-    setTotal(total - +cart[id].total);
+    console.log(cart[id]);
+    // setTotal(total - +cart[id].total);
     setCart((currentCart) => {
       return [...currentCart.slice(0, id), ...currentCart.slice(id + 1)];
     });
@@ -125,7 +126,7 @@ const App = () => {
   ];
 
   return (
-    <Container maxW="container.xl" pt="2">
+    <Container maxW={{ base: "container.xl" }} pt="2">
       <TabsComponent
         tabItems={tabItems}
         tabIndex={tabIndex}

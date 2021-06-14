@@ -21,8 +21,6 @@ const accessories = importAll(
 );
 
 const General = ({ colour, style, addToCart, multiple }) => {
-  console.log(colour);
-
   const [quantity, setQuantity] = useState(null);
   const [length, setLength] = useState(null);
 

@@ -11,7 +11,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-const DrawerComponent = ({ drawer, addToCart }) => {
+const KitchenComponent = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState([]);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -29,7 +29,7 @@ const DrawerComponent = ({ drawer, addToCart }) => {
     return true;
   };
 
-  const onSubmit = (e, drawer) => {
+  const onSubmit = (e, product) => {
     e.preventDefault();
     errors.length = 0;
 
@@ -38,10 +38,10 @@ const DrawerComponent = ({ drawer, addToCart }) => {
     }
 
     addToCart({
-      product: drawer.name,
+      product: product.name,
       quantity,
-      src: drawer.src,
-      total: drawer.price * quantity,
+      src: product.src,
+      total: product.price * quantity,
     });
 
     setAddedToCart(true);
@@ -71,13 +71,13 @@ const DrawerComponent = ({ drawer, addToCart }) => {
           padding: "5px",
         }}
       >
-        {drawer.name}
+        {product.name}
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <img src={drawer.src} alt={drawer.name} />
+        <img src={product.src} alt={product.name} />
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        {drawer.description}
+        {product.description}
       </Box>
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
@@ -91,13 +91,13 @@ const DrawerComponent = ({ drawer, addToCart }) => {
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <p>
-          <b>£{(drawer.price * quantity).toFixed(2)}</b>
+          <b>£{(product.price * quantity).toFixed(2)}</b>
         </p>
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <Button
           style={{ backgroundColor: "#C2B59C", width: "100%", color: "white" }}
-          onClick={(e) => onSubmit(e, drawer)}
+          onClick={(e) => onSubmit(e, product)}
         >
           Add To Cart
         </Button>
@@ -125,4 +125,4 @@ const DrawerComponent = ({ drawer, addToCart }) => {
   );
 };
 
-export default DrawerComponent;
+export default KitchenComponent;

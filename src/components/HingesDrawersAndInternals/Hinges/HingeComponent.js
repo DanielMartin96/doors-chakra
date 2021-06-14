@@ -74,7 +74,7 @@ const HingeComponent = ({ hinge, addToCart }) => {
           color: "white",
           fontSize: "16px",
           fontWeight: "bold",
-          padding: "5px 0",
+          padding: "5px",
         }}
       >
         {hinge.name}
@@ -93,12 +93,13 @@ const HingeComponent = ({ hinge, addToCart }) => {
       >
         {["Silver", "Black"].map((colour) => {
           return (
-            <div style={{ margin: " 0 10px" }} key={colour}>
+            <div style={{ margin: " 0 5px" }} key={colour}>
               <input
                 type="radio"
                 name="colour"
                 id={colour}
                 onChange={() => setColour(colour)}
+                style={{ marginRight: "5px" }}
               />
               <label htmlFor={colour}>{colour}</label>
             </div>
@@ -107,7 +108,7 @@ const HingeComponent = ({ hinge, addToCart }) => {
       </Box>
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <NumberInput onChange={(e) => setQuantity(e)} min={0}>
+        <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>
             <NumberIncrementStepper />

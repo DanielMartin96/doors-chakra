@@ -68,7 +68,7 @@ const GeneralComponent = ({ product, addToCart }) => {
           color: "white",
           fontSize: "16px",
           fontWeight: "bold",
-          padding: "5px 0",
+          padding: "5px",
         }}
       >
         {product.name}
@@ -81,7 +81,7 @@ const GeneralComponent = ({ product, addToCart }) => {
       </Box>
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <NumberInput onChange={(e) => setQuantity(e)} min={0}>
+        <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>
             <NumberIncrementStepper />

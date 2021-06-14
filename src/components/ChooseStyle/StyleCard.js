@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
 
+import "./StyleCard.css";
+
 const StyleCard = ({ option, setTabIndex, setStyle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -13,6 +15,7 @@ const StyleCard = ({ option, setTabIndex, setStyle }) => {
         flexDirection="column"
         textAlign="center"
         m="2"
+        className="styleCard"
         style={{ cursor: "pointer" }}
         onClick={() => {
           setTabIndex(2);

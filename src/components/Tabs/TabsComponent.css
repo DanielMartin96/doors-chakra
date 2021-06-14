@@ -4,5 +4,22 @@
   font-weight: bold;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  padding: 0px;
+}
+
+.tabs {
+  border-bottom: 10px solid #c2b59c;
+}
+
+@media only screen and (max-width: 1033px) {
+  .tab {
+    width: 50%;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    height: 70px;
+  }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

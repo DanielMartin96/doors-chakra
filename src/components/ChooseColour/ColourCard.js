@@ -1,6 +1,8 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
+import "./ColourCard.css";
+
 const ColourCard = ({ option, setTabIndex, setColour }) => {
   return (
     <Box
@@ -10,6 +12,7 @@ const ColourCard = ({ option, setTabIndex, setColour }) => {
       flexDirection="column"
       textAlign="center"
       m="2"
+      className="colourCard"
       style={{ cursor: "pointer" }}
       onClick={() => {
         setTabIndex(1);
