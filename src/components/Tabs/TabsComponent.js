@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 import "./TabsComponent.css";
@@ -35,7 +35,7 @@ const TabsComponent = ({
               backgroundColor: "#C2B59C",
             }}
             style={{
-              padding: "5px 35.56px",
+              padding: "5px 23px",
               borderBottom: "5px solid #C2B59C",
             }}
             onClick={() => {

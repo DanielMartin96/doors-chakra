@@ -12,7 +12,9 @@ import {
 
 import Item from "./Item";
 
-const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
+const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart, total }) => {
+  console.log(cart);
+
   return (
     <>
       <Drawer
@@ -34,15 +36,26 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart }) => {
             }}
           >
             {cart.map((item, idx) => (
-              <Item item={item} removeFromCart={removeFromCart} key={idx} />
+              <Item
+                item={item}
+                removeFromCart={removeFromCart}
+                idx={idx}
+                key={idx}
+              />
             ))}
           </DrawerBody>
 
-          <DrawerFooter>
-            <Button mr={3} onClick={() => setBasketOpen(!basketOpen)}>
-              Cancel
-            </Button>
-            <Button colorScheme="blackAlpha">Checkout</Button>
+          <DrawerFooter style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: "24px" }}>
+              Total: <b>£{total.toFixed(2)}</b>
+            </div>
+            <br />
+            <div>
+              <Button mr={3} onClick={() => setBasketOpen(!basketOpen)}>
+                Cancel
+              </Button>
+              <Button colorScheme="blackAlpha">Checkout</Button>
+            </div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

@@ -22,7 +22,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     extraHingeHoleSide: "",
     extraHingeHoleDistance: null,
     quantity: null,
-    price: 0.0,
+    total: 0.0,
   });
 
   useEffect(() => {
@@ -51,6 +51,11 @@ const ChooseSize = ({ colour, style, addToCart }) => {
 
   // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
   const onChange = () => {
+    if (order.quantity < 0) {
+      alert("Quantity can't be a negative");
+      return;
+    }
+
     if (
       needsCustomSize &&
       order.standardHeight !== null &&
@@ -58,7 +63,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     ) {
       setOrder({
         ...order,
-        price:
+        total:
           findPrice(order.standardHeight, order.standardWidth, prices).price *
           order.quantity,
       });
@@ -68,7 +73,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     if (order.height && order.width !== null) {
       setOrder({
         ...order,
-        price:
+        total:
           findPrice(+order.height, +order.width, prices).price * order.quantity,
       });
     }
@@ -105,10 +110,9 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               onChange();
             }}
             disabled={needsCustomSize}
+            defaultValue="Height"
           >
-            <option value="" disabled selected>
-              Height
-            </option>
+            <option disabled>Height</option>
             {heights.map((height) => (
               <option value={height} key={height}>
                 {height}
@@ -135,10 +139,9 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               onChange();
             }}
             disabled={needsCustomSize}
+            defaultValue="Width"
           >
-            <option value="" disabled selected>
-              Width
-            </option>
+            <option disabled>Width</option>
             {widths.map((width) => (
               <option value={width} key={width}>
                 {width}
@@ -175,13 +178,14 @@ const ChooseSize = ({ colour, style, addToCart }) => {
                 borderBottomLeftRadius: "5px",
                 width: "85%",
               }}
-              onChange={(e) =>
+              onChange={(e) => {
                 setOrder({
                   ...order,
                   height: e.target.value,
                   standardHeight: findNextSizeUp(e.target.value, heights),
-                })
-              }
+                });
+                onChange();
+              }}
             />
             <div
               style={{
@@ -274,10 +278,9 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               onChange={(e) =>
                 setOrder({ ...order, sideHingeHoles: e.target.value })
               }
+              defaultValue="Orientation"
             >
-              <option value="" disabled selected>
-                Orientation
-              </option>
+              <option disabled>Orientation</option>
               <option>Top Hanging Door</option>
               <option>Left Hanging Door</option>
               <option>Right Hanging Door</option>
@@ -425,9 +428,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
                     setOrder({ ...order, extraHingeHoleSide: e.target.value })
                   }
                 >
-                  <option value="" disabled selected>
-                    From
-                  </option>
+                  <option disabled>From</option>
                   <option>Top</option>
                   <option>Bottom</option>
                 </select>
@@ -449,12 +450,15 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             borderRadius: "5px",
             width: "98.5%",
           }}
-          onChange={(e) => setOrder({ ...order, quantity: e.target.value })}
+          onChange={(e) => {
+            setOrder({ ...order, quantity: e.target.value });
+          }}
           onClick={() => onChange()}
+          min="1"
         />
       </FormControl>
       <Text fontSize="3xl" m="2">
-        Price: <b>£{order.price.toFixed(2)}</b>
+        Price: <b>£{order.total.toFixed(2)}</b>
       </Text>
       <button
         style={{

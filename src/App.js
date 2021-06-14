@@ -34,8 +34,7 @@ const App = () => {
 
   const removeFromCart = (id, item) => {
     window.localStorage.removeItem(item);
-    console.log(cart[id]);
-    // setTotal(total - +cart[id].total);
+    setTotal(total - +cart[id].total);
     setCart((currentCart) => {
       return [...currentCart.slice(0, id), ...currentCart.slice(id + 1)];
     });
@@ -126,7 +125,7 @@ const App = () => {
   ];
 
   return (
-    <Container maxW={{ base: "container.xl" }} pt="2">
+    <Container maxW="1080px" pt="2">
       <TabsComponent
         tabItems={tabItems}
         tabIndex={tabIndex}
@@ -141,6 +140,7 @@ const App = () => {
         setBasketOpen={setBasketOpen}
         cart={cart}
         removeFromCart={removeFromCart}
+        total={total}
       />
     </Container>
   );

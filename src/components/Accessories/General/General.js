@@ -21,7 +21,6 @@ const accessories = importAll(
 );
 
 const General = ({ colour, style, addToCart, multiple }) => {
-  const [quantity, setQuantity] = useState(null);
   const [length, setLength] = useState(null);
 
   const products = [
@@ -171,23 +170,6 @@ const General = ({ colour, style, addToCart, multiple }) => {
       src: accessories["flush-mount-brackets-8.jpg"].default,
     },
   ];
-
-  const onSubmit = (product, quantity) => {
-    if (product.customLength) {
-      // 1000mm is 18.04
-      // 1mm 18.04/1000 = 0.01804
-      // 0.01804 * mm
-      let customTotal = length * 0.01804;
-      let total = customTotal.toFixed(2) * quantity;
-      addToCart({ product: product.name, total: total.toFixed(2), quantity });
-      return;
-    }
-    let total = product.price * quantity;
-    total = total * multiple;
-    addToCart({ product: product.name, total: total.toFixed(2), quantity });
-
-    return;
-  };
 
   return (
     <div

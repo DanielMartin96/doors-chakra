@@ -6,8 +6,6 @@ import options from "../ChooseColour/options";
 const Item = ({ item, removeFromCart, idx }) => {
   const [price, setPrice] = useState(item.price / item.quantity);
 
-  console.log(price);
-
   const findColour = (colour, options) => {
     for (let i = 0; i < options.length; i++) {
       if (colour === options[i].name) {
@@ -15,6 +13,8 @@ const Item = ({ item, removeFromCart, idx }) => {
       }
     }
   };
+
+  console.log(item);
 
   return (
     <Box
@@ -44,7 +44,7 @@ const Item = ({ item, removeFromCart, idx }) => {
           {item.colour} {item.style} {item.product}
         </div>
         <div>
-          <CloseButton onClick={() => removeFromCart(idx)} />
+          <CloseButton onClick={() => removeFromCart(idx, item.product)} />
         </div>
       </Box>
       <Box

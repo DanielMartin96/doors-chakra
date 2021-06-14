@@ -13,6 +13,7 @@ import {
 
 const GeneralComponent = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
+  const [length, setLength] = useState(null);
   const [errors, setErrors] = useState([]);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -37,11 +38,27 @@ const GeneralComponent = ({ product, addToCart }) => {
       return;
     }
 
+    if (product.customLength) {
+      // 1000mm is 18.04
+      // 1mm 18.04/1000 = 0.01804
+      // 0.01804 * mm
+      let customTotal = length * 0.01804;
+      let total = customTotal.toFixed(2) * quantity;
+      addToCart({
+        product: product.name,
+        total: total.toFixed(2),
+        quantity,
+        src: product.src,
+      });
+      return;
+    }
+    let total = product.price * quantity;
+
     addToCart({
       product: product.name,
+      total: total.toFixed(2),
       quantity,
       src: product.src,
-      total: product.price * quantity,
     });
 
     setAddedToCart(true);

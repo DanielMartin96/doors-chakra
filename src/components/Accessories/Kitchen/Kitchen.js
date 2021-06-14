@@ -161,8 +161,8 @@ const Kitchen = ({ colour, style, addToCart }) => {
         justifyContent: "space-evenly",
       }}
     >
-      {products.map((product) => (
-        <KitchenComponent product={product} addToCart={addToCart} />
+      {products.map((product, idx) => (
+        <KitchenComponent product={product} addToCart={addToCart} key={idx} />
       ))}
     </div>
   );
