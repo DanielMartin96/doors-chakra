@@ -14,8 +14,6 @@ const Item = ({ item, removeFromCart, idx }) => {
     }
   };
 
-  console.log(item);
-
   return (
     <Box
       d="flex"

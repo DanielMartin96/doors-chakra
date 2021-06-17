@@ -128,7 +128,7 @@ const options = [
   },
   {
     name: "Matt Black",
-    src: "",
+    src: colours["Matt Black.jpg"].default,
   },
   {
     name: "London Concrete",
@@ -136,7 +136,7 @@ const options = [
   },
   {
     name: "Moldau Acacia",
-    src: "",
+    src: colours["Moldau Acacia.jpg"].default,
   },
   {
     name: "Canadian Maple",

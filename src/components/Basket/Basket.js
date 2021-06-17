@@ -13,8 +13,6 @@ import {
 import Item from "./Item";
 
 const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart, total }) => {
-  console.log(cart);
-
   return (
     <>
       <Drawer
