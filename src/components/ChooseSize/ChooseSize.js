@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Heading, Text, FormControl } from "@chakra-ui/react";
+import {
+  Heading,
+  Text,
+  FormControl,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from "@chakra-ui/react";
 
 import "./ChooseSize.css";
 import heights from "./heights";
@@ -21,7 +30,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     bottomHingeHole: null,
     extraHingeHoleSide: "",
     extraHingeHoleDistance: null,
-    quantity: null,
+    quantity: 1,
     total: 0.0,
   });
 
@@ -51,24 +60,17 @@ const ChooseSize = ({ colour, style, addToCart }) => {
 
   // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
   const onChange = () => {
-    if (order.quantity < 0) {
-      alert("Quantity can't be a negative");
-      return;
-    }
-
     if (
       needsCustomSize &&
       order.standardHeight !== null &&
       order.standardWidth !== null
     ) {
-      setOrder({
+      return setOrder({
         ...order,
         total:
           findPrice(order.standardHeight, order.standardWidth, prices).price *
           order.quantity,
       });
-
-      return;
     }
     if (order.height && order.width !== null) {
       setOrder({
@@ -439,23 +441,34 @@ const ChooseSize = ({ colour, style, addToCart }) => {
       ) : null}
       {/* Quantity Input */}
       <FormControl m="2">
-        <input
-          type="number"
-          placeholder="Quantity"
-          style={{
-            height: "50px",
-            fontSize: "30px",
-            textColor: "white",
-            padding: "20px",
-            borderRadius: "5px",
-            width: "98.5%",
-          }}
+        <NumberInput
+          style={{ width: "98.5%" }}
+          min={1}
           onChange={(e) => {
-            setOrder({ ...order, quantity: e.target.value });
+            if (e < 0) {
+              return;
+            }
+            setOrder({ ...order, quantity: e });
           }}
-          onClick={() => onChange()}
-          min="1"
-        />
+        >
+          <NumberInputField
+            style={{
+              height: "50px",
+              fontSize: "30px",
+              textColor: "white",
+              padding: "20px",
+              borderRadius: "5px",
+              backgroundColor: "white",
+            }}
+            onClick={() => onChange()}
+            value={order.quantity}
+            placeholder={order.quantity}
+          />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
+        </NumberInput>
       </FormControl>
       <Text fontSize="3xl" m="2">
         Price: <b>£{order.total.toFixed(2)}</b>

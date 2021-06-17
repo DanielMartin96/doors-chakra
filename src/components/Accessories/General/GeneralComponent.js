@@ -96,8 +96,21 @@ const GeneralComponent = ({ product, addToCart }) => {
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         {product.description}
       </Box>
+      {product.customLength ? (
+        <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+          <label>Custom Length (mm) :</label>
+          <NumberInput
+            onChange={(e) => setLength(e)}
+            min={product.min}
+            max={product.max}
+          >
+            <NumberInputField placeholder={length} />
+          </NumberInput>
+        </Box>
+      ) : null}
 
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+        <label>Quantity:</label>
         <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>

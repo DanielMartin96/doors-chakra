@@ -8,6 +8,7 @@ import ChooseStyle from "./components/ChooseStyle/ChooseStyle";
 import ChooseSize from "./components/ChooseSize/ChooseSize";
 import Accessories from "./components/Accessories/Accessories";
 import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
+import Checkout from "./components/Checkout/Checkout";
 import Basket from "./components/Basket/Basket";
 
 const App = () => {
@@ -115,7 +116,7 @@ const App = () => {
     },
     {
       title: "Checkout",
-      content: "Checkout content",
+      content: <Checkout cart={cart} />,
     },
     {
       title: "",
