@@ -6,26 +6,33 @@ import TabsComponent from "./components/Tabs/TabsComponent";
 import ChooseColour from "./components/ChooseColour/ChooseColour";
 import ChooseStyle from "./components/ChooseStyle/ChooseStyle";
 import ChooseSize from "./components/ChooseSize/ChooseSize";
+import FramesAndFeatureDoors from "./components/FramesAndFeatureDoors/FramesAndFeatureDoors";
 import Accessories from "./components/Accessories/Accessories";
 import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
 import Checkout from "./components/Checkout/Checkout";
 import Basket from "./components/Basket/Basket";
 
 const App = () => {
+  // The index of the active tabs. 0 is the first tab
   const [tabIndex, setTabIndex] = useState(0);
+  // The colour of the door, gets picked in the ChooseColour section
   const [colour, setColour] = useState("");
+  // The style of the door, gets picked in the ChooseStyle section
   const [style, setStyle] = useState("");
+  // Whether the basket is open
   const [basketOpen, setBasketOpen] = useState(false);
   // Cart
   const [cart, setCart] = useState([]);
   // Total
   const [total, setTotal] = useState(0);
 
+  // Runs these functions on page load
   useEffect(() => {
     getCart();
     getTotal();
   }, []);
 
+  // Adds item to local storage and also adds it to the cart array
   const addToCart = (item) => {
     window.localStorage.setItem(item.product, JSON.stringify(item));
     setCart((currentCart) => [...currentCart, item]);
@@ -33,6 +40,7 @@ const App = () => {
     setBasketOpen(!basketOpen);
   };
 
+  // Removes item from local storage and also removes it from the cart array
   const removeFromCart = (id, item) => {
     window.localStorage.removeItem(item);
     setTotal(total - +cart[id].total);
@@ -41,6 +49,7 @@ const App = () => {
     });
   };
 
+  // Gets all the items out of local storage and sets it in the cart
   const getCart = () => {
     var values = [],
       keys = Object.keys(localStorage),
@@ -57,6 +66,7 @@ const App = () => {
     return setCart(array);
   };
 
+  // Loops through all the cart and gets the total
   const getTotal = () => {
     var values = [],
       keys = Object.keys(localStorage),
@@ -79,6 +89,7 @@ const App = () => {
     return;
   };
 
+  // The items in the tab at the top of the screem
   const tabItems = [
     {
       title: "Colour",
@@ -102,7 +113,7 @@ const App = () => {
     },
     {
       title: "Frames and Features",
-      content: "Frames and features content",
+      content: <FramesAndFeatureDoors colour={colour} style={style} />,
     },
     {
       title: "Accessories",
@@ -125,6 +136,7 @@ const App = () => {
     },
   ];
 
+  // What is shown on the screen
   return (
     <Container maxW="1080px" pt="2">
       <TabsComponent

@@ -6,6 +6,7 @@ import Kitchen from "./Kitchen/Kitchen";
 
 const Accessories = ({ addToCart, colour, style }) => {
   const [tabIndex, setTabIndex] = useState(0);
+
   const tabItems = [
     {
       title: "General",
