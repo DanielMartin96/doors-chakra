@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import FramePage from "./FramePage";
+
 import OpenFrame from "./Frames/OpenFrame";
 import GeorgianFrame from "./Frames/GeorgianFrame";
 import WaveFrame from "./Frames/WaveFrame";
@@ -79,13 +81,17 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
     <Router>
       <div
         onClick={() => hideMenu(!menuHidden)}
-        style={{ display: menuHidden ? "none" : "flex" }}
+        style={{
+          display: menuHidden ? "none" : "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+        }}
       >
         {icons.map((icon) => {
           return (
             <Link to={`/${icon.slug}`}>
               <Box
-                maxW="sm"
+                w="200px"
                 d="flex"
                 flexWrap="wrap"
                 flexDirection="column"
@@ -116,67 +122,83 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
       </div>
       <Switch>
         <Route path="/open-frame">
-          <OpenFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["open-frame.png"].default}
+            title="Open Frame"
           />
         </Route>
         <Route path="/georgian-frame">
-          <GeorgianFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["georgian-frame.png"].default}
+            title="Georgian Frame"
           />
         </Route>
         <Route path="/wave-frame">
-          <WaveFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["wave-frame.png"].default}
+            title="Wave Frame"
           />
         </Route>
         <Route path="/porthole-frame">
-          <PortholeFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["porthole-frame.png"].default}
+            title="Porthole Frame"
           />
         </Route>
         <Route path="/square-hole-frame">
-          <SquareHoleFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["square-hole-frame.png"].default}
+            title="Square Hole Frame"
           />
         </Route>
         <Route path="/five-hole-frame">
-          <FiveHoleFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["five-hole-frame.png"].default}
+            title="Five Hole Frame"
           />
         </Route>
         <Route path="/letter-box-frame">
-          <LetterBoxFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["letter-box-frame.png"].default}
+            title="Letter Box Frame"
           />
         </Route>
         <Route path="/drawer-frame">
-          <DrawerFrame
+          <FramePage
             colour={colour}
             style={style}
             menuHidden={menuHidden}
             hideMenu={hideMenu}
+            src={frames["drawer-frame.png"].default}
+            title="Drawer Frame"
           />
         </Route>
       </Switch>

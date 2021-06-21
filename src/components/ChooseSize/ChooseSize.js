@@ -58,6 +58,12 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     return;
   };
 
+  const onStandardChange = () => {
+    if (needsCustomSize) return;
+
+    console.log(order.height, order.width);
+  };
+
   // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
   const onChange = () => {
     if (
@@ -109,7 +115,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             }}
             onChange={(e) => {
               setOrder({ ...order, height: e.target.value });
-              onChange();
+              onStandardChange();
             }}
             disabled={needsCustomSize}
             defaultValue="Height"
@@ -138,7 +144,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             }}
             onChange={(e) => {
               setOrder({ ...order, width: e.target.value });
-              onChange();
+              onStandardChange();
             }}
             disabled={needsCustomSize}
             defaultValue="Width"
