@@ -9,6 +9,7 @@ import ChooseSize from "./components/ChooseSize/ChooseSize";
 import FramesAndFeatureDoors from "./components/FramesAndFeatureDoors/FramesAndFeatureDoors";
 import Accessories from "./components/Accessories/Accessories";
 import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
+import Cabinets from "./components/Cabinets/Cabinets";
 import Checkout from "./components/Checkout/Checkout";
 import Basket from "./components/Basket/Basket";
 
@@ -124,6 +125,10 @@ const App = () => {
     {
       title: "Hinges, Drawers and Internals",
       content: <HingesDrawersAndInternals addToCart={addToCart} />,
+    },
+    {
+      title: "Cabinets",
+      content: <Cabinets />,
     },
     {
       title: "Checkout",

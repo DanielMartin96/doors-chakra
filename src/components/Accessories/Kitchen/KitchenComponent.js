@@ -53,7 +53,7 @@ const KitchenComponent = ({ product, addToCart }) => {
 
   return (
     <Box
-      maxW="250px"
+      maxW="200px"
       d="flex"
       flexWrap="wrap"
       flexDirection="column"
@@ -73,7 +73,7 @@ const KitchenComponent = ({ product, addToCart }) => {
       >
         {product.name}
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <img src={product.src} alt={product.name} />
       </Box>
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>

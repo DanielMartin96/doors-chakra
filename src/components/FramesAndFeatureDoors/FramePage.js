@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Heading,
@@ -9,13 +9,34 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import TabsComponent from "../Tabs/TabsComponent";
+
+const tabItems = [
+  {
+    title: "Frame Type",
+    content: "Frame Types",
+  },
+  {
+    title: "Glass Fixing Options & Glazing",
+    content: "Glass Fixing Options & Glazing",
+  },
+];
+
 const FramePage = ({ colour, style, menuHidden, hideMenu, src, title }) => {
+  const [tabIndex, setTabIndex] = useState(0);
+
   return (
     <div>
       <div style={{ display: "flex" }}>
         <img src={src} alt="Open Frame" width="300px" />
         <div>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <Heading m="2">
               {colour} {style} {title}
             </Heading>
@@ -52,6 +73,11 @@ const FramePage = ({ colour, style, menuHidden, hideMenu, src, title }) => {
           <label>
             <b>Rotate Grain G = Grain Direction</b>
           </label>
+          <TabsComponent
+            style={{ margin: "10px" }}
+            tabItems={tabItems}
+            setTabIndex={setTabIndex}
+          />
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ const HingeComponent = ({ hinge, addToCart }) => {
 
   return (
     <Box
-      maxW="250px"
+      maxW="200px"
       d="flex"
       flexWrap="wrap"
       flexDirection="column"

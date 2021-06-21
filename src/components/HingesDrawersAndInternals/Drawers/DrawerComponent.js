@@ -53,7 +53,7 @@ const DrawerComponent = ({ drawer, addToCart }) => {
 
   return (
     <Box
-      maxW="250px"
+      maxW="200px"
       d="flex"
       flexWrap="wrap"
       flexDirection="column"

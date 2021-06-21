@@ -4,15 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import FramePage from "./FramePage";
 
-import OpenFrame from "./Frames/OpenFrame";
-import GeorgianFrame from "./Frames/GeorgianFrame";
-import WaveFrame from "./Frames/WaveFrame";
-import PortholeFrame from "./Frames/PortfolioFrame";
-import SquareHoleFrame from "./Frames/SquareHoleFrame";
-import FiveHoleFrame from "./Frames/FiveHoleFrame";
-import LetterBoxFrame from "./Frames/LetterBoxFrame";
-import DrawerFrame from "./Frames/DrawerFrame";
-
 // function that imports all necessary images
 function importAll(r) {
   let images = {};
