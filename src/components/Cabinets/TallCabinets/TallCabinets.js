@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ClicBoxColourTab from "../ClicBoxColourTab";
 import options from "./options";
 import CabinetComponent from "../CabinetComponent";
 
-const TallCabinets = () => {
+const TallCabinets = ({ addToCart }) => {
+  const [colour, setColour] = useState("White");
   return (
     <div>
-      <ClicBoxColourTab />
+      <ClicBoxColourTab setColour={setColour} colour={colour} />
       <hr />
       <div
         style={{
@@ -17,7 +18,12 @@ const TallCabinets = () => {
         }}
       >
         {options.map((cabinet, idx) => (
-          <CabinetComponent cabinet={cabinet} />
+          <CabinetComponent
+            cabinet={cabinet}
+            key={idx}
+            addToCart={addToCart}
+            colour={colour}
+          />
         ))}
       </div>
     </div>

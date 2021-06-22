@@ -22,7 +22,7 @@ const tabItems = [
   },
 ];
 
-const FramePage = ({ colour, style, menuHidden, hideMenu, src, title }) => {
+const FramePage = ({ colour, style, src, title }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
@@ -40,7 +40,7 @@ const FramePage = ({ colour, style, menuHidden, hideMenu, src, title }) => {
             <Heading m="2">
               {colour} {style} {title}
             </Heading>
-            <Link to="/" onClick={() => hideMenu(!menuHidden)}>
+            <Link to="/">
               <Button
                 bg="#c2b59c"
                 _hover={{ bg: "#58595b", color: "white" }}

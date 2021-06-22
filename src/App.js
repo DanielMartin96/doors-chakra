@@ -129,7 +129,7 @@ const App = () => {
     },
     {
       title: "Cabinets",
-      content: <Cabinets />,
+      content: <Cabinets addToCart={addToCart} />,
     },
     {
       title: "Checkout",

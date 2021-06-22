@@ -35,7 +35,14 @@ const StyleCard = ({ option, setTabIndex, setStyle }) => {
         >
           {option.name}
         </Box>
-        <Box bg="white" p="4">
+        <Box
+          bg="white"
+          p="4"
+          style={{
+            borderBottomLeftRadius: "10px",
+            borderBottomRightRadius: "10px",
+          }}
+        >
           <img src={option.src} alt={option.name} style={{ width: "150px" }} />
         </Box>
       </Box>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 import FramePage from "./FramePage";
 
@@ -66,58 +66,63 @@ const icons = [
 ];
 
 const FramesAndFeatureDoors = ({ colour, style }) => {
-  const [menuHidden, hideMenu] = useState(false);
-
   return (
     <>
-      <div
-        onClick={() => hideMenu(!menuHidden)}
-        style={{
-          display: menuHidden ? "none" : "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-        }}
-      >
-        {icons.map((icon) => {
-          return (
-            <Link to={`/${icon.slug}`}>
-              <Box
-                w="200px"
-                d="flex"
-                flexWrap="wrap"
-                flexDirection="column"
-                textAlign="center"
-                m="2"
-                style={{ cursor: "pointer" }}
-              >
-                <Box
-                  style={{
-                    backgroundColor: "#808080",
-                    borderTopLeftRadius: "10px",
-                    borderTopRightRadius: "10px",
-                    color: "white",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    padding: "5px 0",
-                  }}
-                >
-                  {icon.name}
-                </Box>
-                <Box bg="white" p="4">
-                  <img src={icon.src} alt={icon.name} />
-                </Box>
-              </Box>
-            </Link>
-          );
-        })}
-      </div>
       <Switch>
+        <Route exact path="/">
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {icons.map((icon) => {
+              return (
+                <Link to={`/${icon.slug}`}>
+                  <Box
+                    w="200px"
+                    d="flex"
+                    flexWrap="wrap"
+                    flexDirection="column"
+                    textAlign="center"
+                    m="2"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Box
+                      style={{
+                        backgroundColor: "#808080",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
+                        color: "white",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        padding: "5px 0",
+                      }}
+                    >
+                      {icon.name}
+                    </Box>
+                    <Box
+                      bg="white"
+                      p="4"
+                      style={{
+                        borderBottomLeftRadius: "10px",
+                        borderBottomRightRadius: "10px",
+                        padding: "10px",
+                      }}
+                    >
+                      <img src={icon.src} alt={icon.name} />
+                    </Box>
+                  </Box>
+                </Link>
+              );
+            })}
+          </div>
+        </Route>
         <Route path="/open-frame">
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["open-frame.png"].default}
             title="Open Frame"
           />
@@ -126,8 +131,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["georgian-frame.png"].default}
             title="Georgian Frame"
           />
@@ -136,8 +139,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["wave-frame.png"].default}
             title="Wave Frame"
           />
@@ -146,8 +147,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["porthole-frame.png"].default}
             title="Porthole Frame"
           />
@@ -156,8 +155,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["square-hole-frame.png"].default}
             title="Square Hole Frame"
           />
@@ -166,8 +163,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["five-hole-frame.png"].default}
             title="Five Hole Frame"
           />
@@ -176,8 +171,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["letter-box-frame.png"].default}
             title="Letter Box Frame"
           />
@@ -186,8 +179,6 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           <FramePage
             colour={colour}
             style={style}
-            menuHidden={menuHidden}
-            hideMenu={hideMenu}
             src={frames["drawer-frame.png"].default}
             title="Drawer Frame"
           />

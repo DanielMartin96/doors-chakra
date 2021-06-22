@@ -11,9 +11,8 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-const CabinetComponent = ({ cabinet }) => {
+const CabinetComponent = ({ cabinet, addToCart, colour }) => {
   const [quantity, setQuantity] = useState(1);
-  const [length, setLength] = useState(null);
   const [errors, setErrors] = useState([]);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -30,13 +29,20 @@ const CabinetComponent = ({ cabinet }) => {
     return true;
   };
 
-  const onSubmit = (e, product) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     errors.length = 0;
 
     if (!ValidateQuantity(quantity)) {
       return;
     }
+
+    addToCart({
+      product: cabinet.name,
+      quantity,
+      src: cabinet.src,
+      total: cabinet.price * quantity,
+    });
 
     setAddedToCart(true);
 
@@ -65,7 +71,7 @@ const CabinetComponent = ({ cabinet }) => {
           padding: "5px",
         }}
       >
-        {cabinet.name}
+        {cabinet.name} {colour}
       </Box>
       <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <img src={cabinet.src} alt={cabinet.name} />
@@ -92,12 +98,19 @@ const CabinetComponent = ({ cabinet }) => {
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <Button
           style={{ backgroundColor: "#C2B59C", width: "100%", color: "white" }}
-          onClick={(e) => onSubmit(e, cabinet)}
+          onClick={(e) => onSubmit(e)}
         >
           Add To Cart
         </Button>
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box
+        bg="white"
+        style={{
+          borderBottomLeftRadius: "10px",
+          borderBottomRightRadius: "10px",
+          padding: "10px",
+        }}
+      >
         {errors.length > 0
           ? errors.map((error) => {
               return (

@@ -132,7 +132,14 @@ const GeneralComponent = ({ product, addToCart }) => {
           Add To Cart
         </Button>
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box
+        bg="white"
+        style={{
+          borderBottomLeftRadius: "10px",
+          borderBottomRightRadius: "10px",
+          padding: "10px",
+        }}
+      >
         {errors.length > 0
           ? errors.map((error) => {
               return (
