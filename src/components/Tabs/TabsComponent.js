@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-
+import { Link } from "react-router-dom";
 import "./TabsComponent.css";
 
 const TabsComponent = ({
@@ -29,8 +29,8 @@ const TabsComponent = ({
       <TabList className="tabs">
         {tabItems.map((item, idx) => (
           <Tab
-            key={idx}
             className="tab"
+            key={idx}
             _selected={{
               backgroundColor: "#C2B59C",
             }}

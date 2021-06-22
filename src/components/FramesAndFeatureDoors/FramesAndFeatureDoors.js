@@ -69,7 +69,7 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
   const [menuHidden, hideMenu] = useState(false);
 
   return (
-    <Router>
+    <>
       <div
         onClick={() => hideMenu(!menuHidden)}
         style={{
@@ -193,7 +193,7 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
           />
         </Route>
       </Switch>
-    </Router>
+    </>
   );
 };
 

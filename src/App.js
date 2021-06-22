@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@chakra-ui/react";
 import { BiBasket } from "react-icons/bi";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import TabsComponent from "./components/Tabs/TabsComponent";
 import ChooseColour from "./components/ChooseColour/ChooseColour";
@@ -143,24 +144,26 @@ const App = () => {
 
   // What is shown on the screen
   return (
-    <Container maxW="1080px" pt="2">
-      <TabsComponent
-        tabItems={tabItems}
-        tabIndex={tabIndex}
-        setTabIndex={setTabIndex}
-        basketOpen={basketOpen}
-        setBasketOpen={setBasketOpen}
-        colour={colour}
-        style={style}
-      />
-      <Basket
-        basketOpen={basketOpen}
-        setBasketOpen={setBasketOpen}
-        cart={cart}
-        removeFromCart={removeFromCart}
-        total={total}
-      />
-    </Container>
+    <Router>
+      <Container maxW="1080px" pt="2">
+        <TabsComponent
+          tabItems={tabItems}
+          tabIndex={tabIndex}
+          setTabIndex={setTabIndex}
+          basketOpen={basketOpen}
+          setBasketOpen={setBasketOpen}
+          colour={colour}
+          style={style}
+        />
+        <Basket
+          basketOpen={basketOpen}
+          setBasketOpen={setBasketOpen}
+          cart={cart}
+          removeFromCart={removeFromCart}
+          total={total}
+        />
+      </Container>
+    </Router>
   );
 };
 

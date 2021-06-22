@@ -1,21 +1,9 @@
-import React, { useState } from "react";
-
-import TabsComponent from "../Tabs/TabsComponent";
-import ShippingDetails from "./ShippingDetails";
-import BillingDetails from "./BillingDetails";
-
-const tabItems = [
-  { title: "Shipping Details", content: <ShippingDetails /> },
-  { title: "Billing Details", content: <BillingDetails /> },
-];
+import React from "react";
 
 const Checkout = ({ cart }) => {
-  const [tabIndex, setTabIndex] = useState(0);
-
-  console.log(cart);
   return (
     <>
-      <TabsComponent tabItems={tabItems} setTabIndex={setTabIndex} />
+      <h1>Checkout</h1>
     </>
   );
 };
