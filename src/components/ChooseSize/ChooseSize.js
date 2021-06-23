@@ -56,10 +56,24 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     return;
   };
 
-  const onStandardChange = () => {
-    console.log(order.height);
-    console.log(order.width);
+  const onHeightStandardChange = (height) => {
+    // sets height,
+    setOrder({ ...order, height });
+    try {
+      console.log("hello from catch statement");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  // runs when order.height state updates
+  // where the total updates. Takes the new order.height and multiplies it by the current order.quantity
+  useEffect(() => {
+    if (order.height === null) return;
+    const price = findPrice(+order.height, 796, prices).price;
+    setOrder({ ...order, total: price * order.quantity });
+    alert(price);
+  }, [order.height]);
 
   return (
     <div>
@@ -88,8 +102,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               width: "100%",
             }}
             onChange={(e) => {
-              setOrder({ ...order, height: e.target.value });
-              onStandardChange();
+              onHeightStandardChange(e.target.value);
             }}
             disabled={needsCustomSize}
             defaultValue="Height"
@@ -118,7 +131,6 @@ const ChooseSize = ({ colour, style, addToCart }) => {
             }}
             onChange={(e) => {
               setOrder({ ...order, width: e.target.value });
-              onStandardChange();
             }}
             disabled={needsCustomSize}
             defaultValue="Width"
@@ -440,7 +452,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               backgroundColor: "white",
             }}
             value={order.quantity}
-            placeholder={order.quantity}
+            placeholder="1"
           />
           <NumberInputStepper>
             <NumberIncrementStepper />

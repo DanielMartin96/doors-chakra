@@ -1,11 +1,9 @@
 import React from "react";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import "./StyleCard.css";
 
 const StyleCard = ({ option, setTabIndex, setStyle }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Box

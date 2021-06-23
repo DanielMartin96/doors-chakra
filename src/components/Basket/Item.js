@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Text, CloseButton } from "@chakra-ui/react";
 
 import options from "../ChooseColour/options";
 
 const Item = ({ item, removeFromCart, idx }) => {
-  const [price, setPrice] = useState(item.price / item.quantity);
-
   const findColour = (colour, options) => {
     for (let i = 0; i < options.length; i++) {
       if (colour === options[i].name) {

@@ -1,4 +1,3 @@
-import { withTheme } from "@emotion/react";
 import React from "react";
 
 // function that imports all necessary images

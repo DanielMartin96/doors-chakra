@@ -28,10 +28,9 @@ const TabsComponent = ({
     <Tabs index={tabIndex}>
       <TabList className="tabs">
         {tabItems.map((item, idx) => (
-          <Link to="/">
+          <Link to="/" key={idx}>
             <Tab
               className="tab"
-              key={idx}
               _selected={{
                 backgroundColor: "#C2B59C",
               }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import GeneralComponent from "./GeneralComponent";
 
@@ -21,8 +21,6 @@ const accessories = importAll(
 );
 
 const General = ({ colour, style, addToCart, multiple }) => {
-  const [length, setLength] = useState(null);
-
   const products = [
     {
       name: "Door Care Kit",
