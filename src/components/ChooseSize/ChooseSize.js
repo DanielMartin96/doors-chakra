@@ -34,10 +34,6 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     total: 0.0,
   });
 
-  useEffect(() => {
-    onChange();
-  }, [order.quantity]);
-
   // Takes a value and finds the next size up in the array. Will need this information to find the relevant price
   const findNextSizeUp = (value, array) => {
     for (let i = 0; i < array.length; i++) {
@@ -45,6 +41,8 @@ const ChooseSize = ({ colour, style, addToCart }) => {
         return array[i];
       }
     }
+
+    return;
   };
 
   // Takes the height and width from the component state and finds the price from the prices array
@@ -59,32 +57,8 @@ const ChooseSize = ({ colour, style, addToCart }) => {
   };
 
   const onStandardChange = () => {
-    if (needsCustomSize) return;
-
-    console.log(order.height, order.width);
-  };
-
-  // Works out the total of the order. Also runs when the input is clicked as the user may change the lengths but keep the quantity the same meaning the price would of stayed the same
-  const onChange = () => {
-    if (
-      needsCustomSize &&
-      order.standardHeight !== null &&
-      order.standardWidth !== null
-    ) {
-      return setOrder({
-        ...order,
-        total:
-          findPrice(order.standardHeight, order.standardWidth, prices).price *
-          order.quantity,
-      });
-    }
-    if (order.height && order.width !== null) {
-      setOrder({
-        ...order,
-        total:
-          findPrice(+order.height, +order.width, prices).price * order.quantity,
-      });
-    }
+    console.log(order.height);
+    console.log(order.width);
   };
 
   return (
@@ -192,7 +166,6 @@ const ChooseSize = ({ colour, style, addToCart }) => {
                   height: e.target.value,
                   standardHeight: findNextSizeUp(e.target.value, heights),
                 });
-                onChange();
               }}
             />
             <div
@@ -466,7 +439,6 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               borderRadius: "5px",
               backgroundColor: "white",
             }}
-            onClick={() => onChange()}
             value={order.quantity}
             placeholder={order.quantity}
           />

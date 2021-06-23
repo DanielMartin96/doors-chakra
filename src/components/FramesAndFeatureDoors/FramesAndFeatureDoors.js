@@ -77,9 +77,9 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
               justifyContent: "space-evenly",
             }}
           >
-            {icons.map((icon) => {
+            {icons.map((icon, idx) => {
               return (
-                <Link to={`/${icon.slug}`}>
+                <Link to={`/${icon.slug}`} key={idx}>
                   <Box
                     w="200px"
                     d="flex"

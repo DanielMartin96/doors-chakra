@@ -6,29 +6,130 @@ import {
   NumberInputField,
   Text,
   FormControl,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import TabsComponent from "../Tabs/TabsComponent";
+// function that imports all necessary images
+function importAll(r) {
+  let images = {};
+  r.keys().map((item) => {
+    return (images[item.replace("./", "")] = r(item));
+  });
+  return images;
+}
 
-const tabItems = [
+// imports all the images from the aldridge folder in assets/images
+const option = importAll(
+  require.context(
+    "../../assets/images/framesfeaturedoors/types",
+    false,
+    /.(png|jpe?g|svg)$/
+  )
+);
+
+const frameTypes = [
   {
-    title: "Frame Type",
-    content: "Frame Types",
+    name: "Open Frame",
+    height: "H <= 1699mm",
+    src: option["open-frame.jpg"].default,
   },
   {
-    title: "Glass Fixing Options & Glazing",
-    content: "Glass Fixing Options & Glazing",
+    name: "Full Open Frame",
+    height: "H >= 1700mm",
+    src: option["full-open-frame.jpg"].default,
+  },
+  {
+    name: "Top Open Frame",
+    height: "H >= 1700mm",
+    src: option["top-open-frame.jpg"].default,
+  },
+  {
+    name: "T&B Open Frame",
+    height: "H >= 1700mm",
+    src: option["t&b-open-frame.jpg"].default,
+  },
+];
+
+const glassFixingOptions = [
+  {
+    name: "Clips",
+    src: option["clips.jpg"].default,
+  },
+  {
+    name: "Rubber Seal",
+    src: option["rubber-seal.jpg"].default,
+  },
+  {
+    name: "Clear",
+    src: option["clear.jpg"].default,
   },
 ];
 
 const FramePage = ({ colour, style, src, title }) => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [frameType, setFrameType] = useState(null);
+  const [glassFixingOption, setGlassFixingOption] = useState(null);
+
+  const renderFrameTypes = () => {
+    return frameTypes.map((type, idx) => {
+      return (
+        <div
+          style={{
+            textAlign: "center",
+            cursor: "pointer",
+            fontWeight: frameType === type.name ? "bold" : "normal",
+          }}
+          key={idx}
+          onClick={() => setFrameType(type.name)}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={type.src} alt={type.name} />
+          </div>
+          <p>{type.name}</p>
+          <p>{type.height}</p>
+        </div>
+      );
+    });
+  };
+
+  const renderGlassFixingOptions = () => {
+    return glassFixingOptions.map((type, idx) => {
+      return (
+        <div
+          style={{
+            textAlign: "center",
+            cursor: "pointer",
+            fontWeight: glassFixingOption === type.name ? "bold" : "normal",
+          }}
+          key={idx}
+          onClick={() => setGlassFixingOption(type.name)}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={type.src} alt={type.name} />
+          </div>
+          <p>{type.name}</p>
+        </div>
+      );
+    });
+  };
 
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <img src={src} alt="Open Frame" width="300px" />
+        <img
+          src={src}
+          alt={style}
+          width="300px"
+          style={{
+            backgroundColor: "white",
+            borderRadius: "10px",
+            margin: "10px",
+          }}
+        />
         <div>
           <div
             style={{
@@ -73,11 +174,41 @@ const FramePage = ({ colour, style, src, title }) => {
           <label>
             <b>Rotate Grain G = Grain Direction</b>
           </label>
-          <TabsComponent
-            style={{ margin: "10px" }}
-            tabItems={tabItems}
-            setTabIndex={setTabIndex}
-          />
+          <Tabs variant="enclosed">
+            <TabList>
+              {title === "Open Frame" ? (
+                <Tab bg="white" textColor="black">
+                  <span style={{ color: "black", fontWeight: "bold" }}>
+                    Frame Type
+                  </span>
+                </Tab>
+              ) : null}
+
+              <Tab bg="white" textColor="black">
+                <span style={{ color: "black", fontWeight: "bold" }}>
+                  Glass Fixing Options & Glazing
+                </span>
+              </Tab>
+            </TabList>
+            <TabPanels>
+              {title === "Open Frame" ? (
+                <TabPanel bg="white">
+                  <div
+                    style={{ display: "flex", justifyContent: "space-evenly" }}
+                  >
+                    {renderFrameTypes()}
+                  </div>
+                </TabPanel>
+              ) : null}
+              <TabPanel bg="white">
+                <div
+                  style={{ display: "flex", justifyContent: "space-evenly" }}
+                >
+                  {renderGlassFixingOptions()}
+                </div>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </div>
       </div>
     </div>
