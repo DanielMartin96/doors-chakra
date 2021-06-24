@@ -21,17 +21,17 @@ const ChooseSize = ({ colour, style, addToCart }) => {
   const [needsExtraHingeHoles, setNeedsExtraHingeHoles] = useState(false);
   // Holds all the info for the order
   const [order, setOrder] = useState({
-    height: null,
     standardHeight: null,
-    width: null,
     standardWidth: null,
-    sideHingeHoles: "Left Hand Door",
+    customHeight: null,
+    customWidth: null,
+    sideHingeHoles: null,
     topHingeHole: null,
     bottomHingeHole: null,
-    extraHingeHoleSide: "",
+    extraHingeHoleSide: null,
     extraHingeHoleDistance: null,
     quantity: 1,
-    total: 0.0,
+    total: 0,
   });
 
   // Takes a value and finds the next size up in the array. Will need this information to find the relevant price
@@ -56,24 +56,62 @@ const ChooseSize = ({ colour, style, addToCart }) => {
     return;
   };
 
+  // sets height on the standard dropdowns
   const onHeightStandardChange = (height) => {
     // sets height,
-    setOrder({ ...order, height });
-    try {
-      console.log("hello from catch statement");
-    } catch (error) {
-      console.error(error);
-    }
+    setOrder({ ...order, standardHeight: height });
+
+    return;
   };
 
   // runs when order.height state updates
-  // where the total updates. Takes the new order.height and multiplies it by the current order.quantity
+  // where the total updates. Takes the new order.height and the current order.width, finds the price and multiplies it by the current order.quantity
   useEffect(() => {
-    if (order.height === null) return;
-    const price = findPrice(+order.height, 796, prices).price;
-    setOrder({ ...order, total: price * order.quantity });
-    alert(price);
-  }, [order.height]);
+    if (order.standardWidth === null) return;
+
+    const price = findPrice(
+      +order.standardHeight,
+      +order.standardWidth,
+      prices
+    ).price;
+    setOrder({ ...order, price, total: price * order.quantity });
+
+    return;
+  }, [order.standardHeight]);
+
+  // sets height on the standard dropdowns
+  const onWidthStandardChange = (width) => {
+    // sets height,
+    setOrder({ ...order, standardWidth: width });
+
+    return;
+  };
+
+  // runs when order.width state updates
+  // where the total updates. Takes the new order.width and the current order.height, finds the price and multiplies it by the current order.quantity
+  useEffect(() => {
+    if (order.standardHeight === null) return;
+
+    const price = findPrice(
+      +order.standardHeight,
+      +order.standardWidth,
+      prices
+    ).price;
+    setOrder({ ...order, price, total: price * order.quantity });
+
+    return;
+  }, [order.standardWidth]);
+
+  // when the quantity input changes, finds new price
+  useEffect(() => {
+    if (order.standardHeight === null || order.standardWidth === null) return;
+    if (!needsCustomSize)
+      setOrder({ ...order, customHeight: null, customWidth: null });
+
+    setOrder({ ...order, total: order.price * order.quantity });
+
+    return;
+  }, [order.quantity]);
 
   return (
     <div>
@@ -130,7 +168,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               width: "100%",
             }}
             onChange={(e) => {
-              setOrder({ ...order, width: e.target.value });
+              onWidthStandardChange(e.target.value);
             }}
             disabled={needsCustomSize}
             defaultValue="Width"
@@ -175,7 +213,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               onChange={(e) => {
                 setOrder({
                   ...order,
-                  height: e.target.value,
+                  customHeight: e.target.value,
                   standardHeight: findNextSizeUp(e.target.value, heights),
                 });
               }}
@@ -215,7 +253,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
               onChange={(e) => {
                 setOrder({
                   ...order,
-                  width: e.target.value,
+                  customWidth: e.target.value,
                   standardWidth: findNextSizeUp(e.target.value, widths),
                 });
               }}

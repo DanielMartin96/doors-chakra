@@ -13,6 +13,8 @@ import {
 import Item from "./Item";
 
 const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart, total }) => {
+  console.log(cart);
+
   return (
     <>
       <Drawer
@@ -23,7 +25,9 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart, total }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Your Basket</DrawerHeader>
+          <DrawerHeader>
+            <b>Your Basket</b>
+          </DrawerHeader>
 
           <DrawerBody
             style={{
@@ -45,7 +49,7 @@ const Basket = ({ basketOpen, setBasketOpen, cart, removeFromCart, total }) => {
 
           <DrawerFooter style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "24px" }}>
-              Total: <b>£{total.toFixed(2)}</b>
+              Total: <b>£{total < 0 ? 0 : total.toFixed(2)}</b>
             </div>
             <br />
             <div>

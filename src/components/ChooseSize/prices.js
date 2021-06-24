@@ -114,7 +114,7 @@ const prices = [
   { height: 535, width: 996, price: 47.95 },
   { height: 535, width: 1200, price: 57.77 },
   // height 570
-  { height: 570, width: 196, price: 18.86 },
+  { height: 570, width: 146, price: 18.86 },
   { height: 570, width: 296, price: 18.33 },
   { height: 570, width: 396, price: 20.91 },
   { height: 570, width: 446, price: 22.19 },

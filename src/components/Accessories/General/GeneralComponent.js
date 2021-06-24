@@ -56,7 +56,7 @@ const GeneralComponent = ({ product, addToCart }) => {
 
     addToCart({
       product: product.name,
-      total: total.toFixed(2),
+      total,
       quantity,
       src: product.src,
     });

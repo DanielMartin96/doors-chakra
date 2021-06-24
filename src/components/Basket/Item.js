@@ -4,6 +4,8 @@ import { Box, Text, CloseButton } from "@chakra-ui/react";
 import options from "../ChooseColour/options";
 
 const Item = ({ item, removeFromCart, idx }) => {
+  console.log(item);
+
   const findColour = (colour, options) => {
     for (let i = 0; i < options.length; i++) {
       if (colour === options[i].name) {
@@ -60,16 +62,15 @@ const Item = ({ item, removeFromCart, idx }) => {
 
       <Box style={{ backgroundColor: "#E7E7E7" }} pl="4" pr="4" pb="4">
         <Text color="gray">
-          {item.colour} {item.style} {item.product}
+          <b>Quantity:</b> {item.quantity}
         </Text>
         <Text color="gray">
-          {item.height === null && item.width === null
-            ? item.height + "x" + item.width + "mm"
+          {item.standardHeight !== undefined && item.standardWidth !== undefined
+            ? item.standardHeight + " x " + item.standardWidth + "mm"
             : null}
         </Text>
-        <Text fontWeight="bold" color="gray">
-          £{item.price}
-          {item.total}
+        <Text color="gray">
+          <b>Price:</b> £{item.total.toFixed(2)}
         </Text>
       </Box>
     </Box>

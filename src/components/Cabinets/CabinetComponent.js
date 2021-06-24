@@ -38,7 +38,7 @@ const CabinetComponent = ({ cabinet, addToCart, colour }) => {
     }
 
     addToCart({
-      product: cabinet.name,
+      product: cabinet.name + " " + colour,
       quantity,
       src: cabinet.src,
       total: cabinet.price * quantity,
