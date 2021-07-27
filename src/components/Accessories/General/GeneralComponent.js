@@ -39,18 +39,26 @@ const GeneralComponent = ({ product, addToCart }) => {
     }
 
     if (product.customLength) {
-      // 1000mm is 18.04
-      // 1mm 18.04/1000 = 0.01804
-      // 0.01804 * mm
-      let customTotal = length * 0.01804;
-      let total = customTotal.toFixed(2) * quantity;
-      addToCart({
-        product: product.name,
-        total: total.toFixed(2),
-        quantity,
-        src: product.src,
-      });
-      return;
+      if (product.name.includes("Frieze Pelmet")) {
+        // Work out price for Frieze Pelmet
+        // 1000mm is 19.11
+        // 1mm is 19.11/1000 = 0.01911
+        // 0.01911 * mm
+        let customTotal = length * 0.01911;
+        let total = customTotal.toFixed(2) * quantity;
+        addToCart({
+          product: product.name,
+          total: total.toFixed(2),
+          quantity,
+          length,
+          src: product.src,
+        });
+        return;
+      } else if (product.name.includes("PVC'd Plinth")) {
+        // Work out price for PVC'd Plinth
+        // Height doesn't effect
+        console.log("PVC Plinth");
+      }
     }
     let total = product.price * quantity;
 
@@ -70,7 +78,7 @@ const GeneralComponent = ({ product, addToCart }) => {
 
   return (
     <Box
-      maxW="200px"
+      maxW="230px"
       d="flex"
       flexWrap="wrap"
       flexDirection="column"
@@ -98,7 +106,7 @@ const GeneralComponent = ({ product, addToCart }) => {
       </Box>
       {product.customLength ? (
         <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-          <label>Custom Length (mm) :</label>
+          <label>Custom (mm) :</label>
           <NumberInput
             onChange={(e) => setLength(e)}
             min={product.min}

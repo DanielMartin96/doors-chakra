@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TabsComponent from "../Tabs/TabsComponent";
 import Hinges from "./Hinges/Hinges";
 import Drawers from "./Drawers/Drawers";
+import Internals from "./Internals/Internals";
 
 const HingesDrawersAndInternals = ({ addToCart }) => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -10,7 +11,7 @@ const HingesDrawersAndInternals = ({ addToCart }) => {
   const tabItems = [
     { title: "Hinges", content: <Hinges addToCart={addToCart} /> },
     { title: "Drawers", content: <Drawers addToCart={addToCart} /> },
-    { title: "Internals", content: "Internals" },
+    { title: "Internals", content: <Internals addToCart={addToCart} /> },
   ];
 
   return (

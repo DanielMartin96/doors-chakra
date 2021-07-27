@@ -70,9 +70,15 @@ const glassFixingOptions = [
   },
 ];
 
-const FramePage = ({ colour, style, src, title }) => {
+const FramePage = ({ colour, style, src, title, addToCart }) => {
+  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState(null);
+  // true = the grain going right to left, false = bottom to top
+  const [grainDirection, setGrainDirection] = useState(false);
   const [frameType, setFrameType] = useState(null);
   const [glassFixingOption, setGlassFixingOption] = useState(null);
+
+  console.log(height, width, grainDirection, frameType, glassFixingOption);
 
   const renderFrameTypes = () => {
     return frameTypes.map((type, idx) => {
@@ -138,16 +144,11 @@ const FramePage = ({ colour, style, src, title }) => {
               justifyContent: "space-between",
             }}
           >
-            <Heading m="2">
+            <Heading m="2" as="h1" size="lg">
               {colour} {style} {title}
             </Heading>
             <Link to="/">
-              <Button
-                bg="#c2b59c"
-                _hover={{ bg: "#58595b", color: "white" }}
-                p="10"
-                m="2"
-              >
+              <Button bg="#c2b59c" _hover={{ bg: "#58595b", color: "white" }}>
                 Back
               </Button>
             </Link>
@@ -158,7 +159,11 @@ const FramePage = ({ colour, style, src, title }) => {
                 <Text mb="8px" fontWeight="bold">
                   Height:
                 </Text>
-                <NumberInputField placeholder="283mm - 2540mm" bg="white" />
+                <NumberInputField
+                  placeholder="283mm - 2540mm"
+                  bg="white"
+                  onChange={(e) => setHeight(e.target.value)}
+                />
               </NumberInput>
             </FormControl>
             <FormControl w="45%">
@@ -166,11 +171,19 @@ const FramePage = ({ colour, style, src, title }) => {
                 <Text mb="8px" fontWeight="bold">
                   Width:
                 </Text>
-                <NumberInputField placeholder="296mm - 650mm" bg="white" />
+                <NumberInputField
+                  placeholder="296mm - 650mm"
+                  bg="white"
+                  onChange={(e) => setWidth(e.target.value)}
+                />
               </NumberInput>
             </FormControl>
           </div>
-          <input type="checkbox" style={{ margin: "10px" }} />
+          <input
+            type="checkbox"
+            style={{ margin: "10px" }}
+            onChange={() => setGrainDirection(!grainDirection)}
+          />
           <label>
             <b>Rotate Grain G = Grain Direction</b>
           </label>
@@ -209,6 +222,10 @@ const FramePage = ({ colour, style, src, title }) => {
               </TabPanel>
             </TabPanels>
           </Tabs>
+          <input type="checkbox" style={{ margin: "10px" }} />
+          <label>
+            <b>Add Hinge Holes</b>
+          </label>
         </div>
       </div>
     </div>

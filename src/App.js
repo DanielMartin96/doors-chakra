@@ -7,12 +7,12 @@ import TabsComponent from "./components/Tabs/TabsComponent";
 import ChooseColour from "./components/ChooseColour/ChooseColour";
 import ChooseStyle from "./components/ChooseStyle/ChooseStyle";
 import ChooseSize from "./components/ChooseSize/ChooseSize";
-import FramesAndFeatureDoors from "./components/FramesAndFeatureDoors/FramesAndFeatureDoors";
 import Accessories from "./components/Accessories/Accessories";
 import HingesDrawersAndInternals from "./components/HingesDrawersAndInternals/HingesDrawersAndInternals";
 import Cabinets from "./components/Cabinets/Cabinets";
 import Checkout from "./components/Checkout/Checkout";
 import Basket from "./components/Basket/Basket";
+import Layout from "./components/Layout/Layout";
 
 const App = () => {
   // The index of the active tabs. 0 is the first tab
@@ -114,10 +114,6 @@ const App = () => {
       ),
     },
     {
-      title: "Frames and Features",
-      content: <FramesAndFeatureDoors colour={colour} style={style} />,
-    },
-    {
       title: "Accessories",
       content: (
         <Accessories colour={colour} style={style} addToCart={addToCart} />
@@ -144,8 +140,9 @@ const App = () => {
 
   // What is shown on the screen
   return (
-    <Router>
-      <Container maxW="1080px" pt="2">
+    <Layout>
+      <img src
+      <Container maxW="1080px" pt="2" pb="2">
         <TabsComponent
           tabItems={tabItems}
           tabIndex={tabIndex}
@@ -163,7 +160,7 @@ const App = () => {
           total={total}
         />
       </Container>
-    </Router>
+    </Layout>
   );
 };
 

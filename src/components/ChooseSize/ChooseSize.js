@@ -115,7 +115,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
 
   return (
     <div>
-      <Heading as="h1" fontSize="6xl" mb="10">
+      <Heading as="h1" fontSize="4xl" mb="3">
         Choose Your Door Size
       </Heading>
       <div
@@ -217,6 +217,7 @@ const ChooseSize = ({ colour, style, addToCart }) => {
                   standardHeight: findNextSizeUp(e.target.value, heights),
                 });
               }}
+              min="100"
             />
             <div
               style={{

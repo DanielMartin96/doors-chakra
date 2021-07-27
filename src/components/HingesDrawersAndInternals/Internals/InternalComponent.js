@@ -9,9 +9,10 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Select,
 } from "@chakra-ui/react";
 
-const HingeComponent = ({ hinge, addToCart }) => {
+const InternalComponent = ({ internal, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [colour, setColour] = useState("");
   const [errors, setErrors] = useState([]);
@@ -30,7 +31,7 @@ const HingeComponent = ({ hinge, addToCart }) => {
     return true;
   };
 
-  const onSubmit = (e, hinge) => {
+  const onSubmit = (e, internal) => {
     e.preventDefault();
     errors.length = 0;
 
@@ -43,11 +44,11 @@ const HingeComponent = ({ hinge, addToCart }) => {
     }
 
     addToCart({
-      product: hinge.name,
+      product: internal.name,
       colour,
       quantity,
-      src: hinge.src,
-      total: hinge.price * quantity,
+      src: internal.src,
+      total: internal.price * quantity,
     });
 
     setAddedToCart(true);
@@ -77,21 +78,21 @@ const HingeComponent = ({ hinge, addToCart }) => {
           padding: "5px",
         }}
       >
-        {hinge.name}
+        {internal.name}
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        <img src={hinge.src} alt={hinge.name} />
+      <Box bg="white" style={{ padding: "10px" }}>
+        <img src={internal.src} alt={internal.name} />
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
-        {hinge.description}
+      <Box bg="white" style={{ padding: "10px" }}>
+        {internal.description}
       </Box>
       <Box
         bg="white"
-        style={{ padding: "0px 10px 10px 10px" }}
+        style={{ padding: "10px" }}
         d="flex"
         justifyContent="center"
       >
-        {["Silver", "Black"].map((colour) => {
+        {["Grey", "White"].map((colour) => {
           return (
             <div style={{ margin: " 0 5px" }} key={colour}>
               <input
@@ -107,7 +108,31 @@ const HingeComponent = ({ hinge, addToCart }) => {
         })}
       </Box>
 
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box bg="white" style={{ padding: "10px" }}>
+        <Select placeholder="Swivel Direction">
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+        </Select>
+      </Box>
+
+      <Box bg="white" style={{ padding: "10px" }}>
+        <Select placeholder="For Cabinet Width">
+          <option value="800">800mm</option>
+          <option value="900">900mm</option>
+          <option value="1000">1000mm</option>
+        </Select>
+      </Box>
+
+      <Box bg="white" style={{ padding: "10px" }}>
+        <Select placeholder="For Door Width">
+          <option value="380">380mm</option>
+          <option value="430">430mm</option>
+          <option value="480">480mm</option>
+          <option value="580">580mm</option>
+        </Select>
+      </Box>
+
+      <Box bg="white" style={{ padding: "10px" }}>
         <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>
@@ -116,15 +141,16 @@ const HingeComponent = ({ hinge, addToCart }) => {
           </NumberInputStepper>
         </NumberInput>
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+
+      <Box bg="white" style={{ padding: "10px" }}>
         <p>
-          <b>£{(hinge.price * quantity).toFixed(2)}</b>
+          <b>£{(internal.price * quantity).toFixed(2)}</b>
         </p>
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box bg="white" style={{ padding: "10px" }}>
         <Button
           style={{ backgroundColor: "#C2B59C", width: "100%", color: "white" }}
-          onClick={(e) => onSubmit(e, hinge)}
+          onClick={(e) => onSubmit(e, internal)}
         >
           Add To Cart
         </Button>
@@ -159,4 +185,4 @@ const HingeComponent = ({ hinge, addToCart }) => {
   );
 };
 
-export default HingeComponent;
+export default InternalComponent;

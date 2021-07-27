@@ -21,6 +21,7 @@ const Item = ({ item, removeFromCart, idx }) => {
       flexDirection="column"
       textAlign="center"
       m="2"
+      style={{ transform: "scale(90%)" }}
     >
       <Box
         style={{
@@ -70,7 +71,7 @@ const Item = ({ item, removeFromCart, idx }) => {
             : null}
         </Text>
         <Text color="gray">
-          <b>Price:</b> £{item.total.toFixed(2)}
+          <b>Price:</b> £{item.total}
         </Text>
       </Box>
     </Box>

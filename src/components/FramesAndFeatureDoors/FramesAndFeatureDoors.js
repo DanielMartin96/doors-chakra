@@ -119,6 +119,7 @@ const FramesAndFeatureDoors = ({ colour, style }) => {
             })}
           </div>
         </Route>
+
         <Route path="/open-frame">
           <FramePage
             colour={colour}

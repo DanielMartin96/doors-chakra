@@ -53,7 +53,7 @@ const CabinetComponent = ({ cabinet, addToCart, colour }) => {
 
   return (
     <Box
-      maxW="200px"
+      maxW="230px"
       d="flex"
       flexWrap="wrap"
       flexDirection="column"

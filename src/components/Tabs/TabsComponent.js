@@ -28,30 +28,27 @@ const TabsComponent = ({
     <Tabs index={tabIndex}>
       <TabList className="tabs">
         {tabItems.map((item, idx) => (
-          <Link to="/" key={idx}>
-            <Tab
-              className="tab"
-              _selected={{
-                backgroundColor: "#C2B59C",
-              }}
-              style={{
-                padding: "5px 23px",
-                borderBottom: "5px solid #C2B59C",
-                height: "100%",
-              }}
-              onClick={() => {
-                if (item.title.length === 0) {
-                  setBasketOpen(!basketOpen);
-                  return;
-                }
-                setTabIndex(idx);
-              }}
-              isDisabled={tabValidation(item)}
-            >
-              {item.title}
-              <i style={{ fontSize: "30px" }}>{item.icon}</i>
-            </Tab>
-          </Link>
+          <Tab
+            className="tab"
+            _selected={{
+              backgroundColor: "#C2B59C",
+            }}
+            style={{
+              padding: "5px 30px",
+              borderBottom: "5px solid #C2B59C",
+            }}
+            onClick={() => {
+              if (item.title.length === 0) {
+                setBasketOpen(!basketOpen);
+                return;
+              }
+              setTabIndex(idx);
+            }}
+            isDisabled={tabValidation(item)}
+          >
+            {item.title}
+            <i style={{ fontSize: "30px" }}>{item.icon}</i>
+          </Tab>
         ))}
       </TabList>
       <TabPanels>
