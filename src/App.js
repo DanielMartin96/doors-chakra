@@ -141,8 +141,7 @@ const App = () => {
   // What is shown on the screen
   return (
     <Layout>
-      <img src
-      <Container maxW="1080px" pt="2" pb="2">
+      <Container maxWidth="100%" pt="8" pb="2">
         <TabsComponent
           tabItems={tabItems}
           tabIndex={tabIndex}
