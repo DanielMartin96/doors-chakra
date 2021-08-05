@@ -9,6 +9,11 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 
 const GeneralComponent = ({ product, addToCart }) => {
@@ -85,6 +90,7 @@ const GeneralComponent = ({ product, addToCart }) => {
       textAlign="center"
       m="2"
     >
+    
       <Box
         style={{
           backgroundColor: "#808080",
@@ -94,6 +100,10 @@ const GeneralComponent = ({ product, addToCart }) => {
           fontSize: "16px",
           fontWeight: "bold",
           padding: "5px",
+          height:"60px",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {product.name}
@@ -101,7 +111,18 @@ const GeneralComponent = ({ product, addToCart }) => {
       <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <img src={product.src} alt={product.name} />
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Accordion allowToggle bg="white">
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box flex="1" textAlign="left">
+          Product Information
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         {product.description}
       </Box>
       {product.customLength ? (
@@ -140,6 +161,9 @@ const GeneralComponent = ({ product, addToCart }) => {
           Add To Cart
         </Button>
       </Box>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
       <Box
         bg="white"
         style={{
@@ -166,6 +190,7 @@ const GeneralComponent = ({ product, addToCart }) => {
           </Alert>
         ) : null}
       </Box>
+      
     </Box>
   );
 };

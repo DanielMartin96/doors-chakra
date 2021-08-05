@@ -25,7 +25,7 @@ const General = ({ colour, style, addToCart, multiple }) => {
     {
       name: "Door Care Kit",
       description:
-        "Kit includes a tin of 235ml VuPlex polish, micro anti-scratch polishing cloth and full instructions. The door care kit is suitable for use with all gloss door finishes, leaving a coat of polymer that acts as a barrier stopping small scratches and sunlight fade.",
+        "Kit includes a tin of 235ml VuPlex polish, micro anti-scratch polishing cloth and full instructions.",
       price: 12.34,
       customLength: false,
       src: accessories["door-care-kit.jpg"].default,
