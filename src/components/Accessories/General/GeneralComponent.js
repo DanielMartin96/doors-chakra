@@ -124,7 +124,7 @@ const GeneralComponent = ({ product, addToCart }) => {
         <AccordionIcon />
       </AccordionButton>
     </h2>
-    <AccordionPanel pb={4}>
+    <AccordionPanel pt="8">
     <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         {product.description}
       </Box>
@@ -141,7 +141,11 @@ const GeneralComponent = ({ product, addToCart }) => {
         </Box>
       ) : null}
 
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+     
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
+<Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <label>Quantity:</label>
         <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
@@ -164,9 +168,6 @@ const GeneralComponent = ({ product, addToCart }) => {
           Add To Cart
         </Button>
       </Box>
-    </AccordionPanel>
-  </AccordionItem>
-</Accordion>
       <Box
         bg="white"
         style={{
