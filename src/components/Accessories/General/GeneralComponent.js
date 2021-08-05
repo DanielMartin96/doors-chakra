@@ -88,7 +88,10 @@ const GeneralComponent = ({ product, addToCart }) => {
       flexWrap="wrap"
       flexDirection="column"
       textAlign="center"
-      m="2"
+      mr="1"
+      ml="1"
+      mt="2"
+      mb="2"
     >
     
       <Box
