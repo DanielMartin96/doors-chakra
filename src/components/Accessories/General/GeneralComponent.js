@@ -103,7 +103,7 @@ const GeneralComponent = ({ product, addToCart }) => {
           fontSize: "16px",
           fontWeight: "bold",
           padding: "5px",
-          height:"60px",
+          height:"80px",
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
