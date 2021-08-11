@@ -9,6 +9,11 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 
 const DrawerComponent = ({ drawer, addToCart }) => {
@@ -76,11 +81,29 @@ const DrawerComponent = ({ drawer, addToCart }) => {
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <img src={drawer.src} alt={drawer.name} />
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+    
+
+      <Accordion allowToggle bg="white">
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box flex="1" textAlign="left">
+          Product Information
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pt="8">
+  
+
+    <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         {drawer.description}
       </Box>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
 
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>

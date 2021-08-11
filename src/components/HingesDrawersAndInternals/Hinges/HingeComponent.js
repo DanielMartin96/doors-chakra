@@ -9,6 +9,11 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 
 const HingeComponent = ({ hinge, addToCart }) => {
@@ -75,6 +80,10 @@ const HingeComponent = ({ hinge, addToCart }) => {
           fontSize: "16px",
           fontWeight: "bold",
           padding: "5px",
+          height: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {hinge.name}
@@ -82,7 +91,22 @@ const HingeComponent = ({ hinge, addToCart }) => {
       <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
         <img src={hinge.src} alt={hinge.name} />
       </Box>
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+
+
+      <Accordion allowToggle bg="white">
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box flex="1" textAlign="left">
+          Product Information
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pt="8">
+  
+
+    <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         {hinge.description}
       </Box>
       <Box
@@ -106,8 +130,11 @@ const HingeComponent = ({ hinge, addToCart }) => {
           );
         })}
       </Box>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
 
-      <Box bg="white" style={{ padding: "0px 10px 10px 10px" }}>
+      <Box bg="white" style={{ padding: "10px 10px 10px 10px" }}>
         <NumberInput onChange={(e) => setQuantity(e)} min={1}>
           <NumberInputField placeholder={quantity} />
           <NumberInputStepper>

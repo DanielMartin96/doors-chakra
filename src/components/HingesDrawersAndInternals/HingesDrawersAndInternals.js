@@ -11,7 +11,6 @@ const HingesDrawersAndInternals = ({ addToCart }) => {
   const tabItems = [
     { title: "Hinges", content: <Hinges addToCart={addToCart} /> },
     { title: "Drawers", content: <Drawers addToCart={addToCart} /> },
-    { title: "Internals", content: <Internals addToCart={addToCart} /> },
   ];
 
   return (

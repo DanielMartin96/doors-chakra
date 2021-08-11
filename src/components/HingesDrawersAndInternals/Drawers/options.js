@@ -82,19 +82,19 @@ const options = [
   {
     name: "300W Silver S/C Atira Assembled Pan Drawer",
     description: "",
-    src: "",
+    src: drawersPhotos["drawer.jpg"].default,
     price: 37.42,
   },
   {
     name: "400W Silver S/C Atira Assembled Pan Drawer",
     description: "",
-    src: "",
+    src: drawersPhotos["drawer.jpg"].default,
     price: 38.54,
   },
   {
     name: "450W Silver S/C Atira Assembled Pan Drawer",
     description: "",
-    src: "",
+    src: drawersPhotos["drawer.jpg"].default,
     price: 571.72,
   },
   {
